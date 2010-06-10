@@ -1,0 +1,16 @@
+[core]
+	excludesfile = .gitignore
+	editor = mate -w
+[alias]
+	st = status
+	cp = cherry-pick
+	co = checkout
+	ci = commit
+[user]
+	name = Mauricio Zaffari
+	email = mauricio@papodenerd.net
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
