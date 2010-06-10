@@ -69,13 +69,4 @@ export IGNOREPING=true
 
 export ARCHFLAGS="-arch x86_64"
 
-# MacPorts Installer addition on 2009-08-20_at_14:25:42: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/Applications/sshfs/bin/:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
-# MacPorts Installer addition on 2009-08-20_at_14:25:42: adding an appropriate MANPATH variable for use with MacPorts.
-export MANPATH=/opt/local/share/man:$MANPATH
-# Finished adapting your MANPATH environment variable for use with MacPorts.
-
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
