@@ -31,6 +31,7 @@ do script with command \"clear\" in selected tab of the front window
 end tell
 "
   echo "$terminal_clone_command" | osascript &>/dev/null
+  clear
 }
 
 dns() {
