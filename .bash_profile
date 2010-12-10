@@ -18,7 +18,25 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+nt() {
+  terminal_clone_command="
+tell application \"Terminal\"
+tell application \"System Events\" to tell process \"Terminal\" to keystroke \"n\" using command down
+do script with command \"cd `pwd`\" in selected tab of the front window
+do script with command \"rvm `ruby -e "print RUBY_VERSION"`\" in selected tab of the front window
+do script with command \"clear\" in selected tab of the front window
+end tell
+"
+  echo "$terminal_clone_command" | osascript &>/dev/null
+}
+
+dns() {
+  dig soa $1 | grep -q ^$1 && 
+  echo "Registered" || 
+  echo "Available"
 }
 
 export AUTOFEATURE=true
@@ -28,8 +46,8 @@ PS1=''
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color)
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[01;35m\] $(parse_git_branch)\[\033[00m\]\$ '
+xterm-color|screen)
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[01;35m\] [$(parse_git_branch), $(ruby -e "print RUBY_VERSION")]\[\033[00m\]\$ '
     ;;
 *)
     PS1='\u@\h:\w $(parse_git_branch)\$ '
@@ -38,7 +56,7 @@ esac
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|screen*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
     ;;
 *)
@@ -68,5 +86,7 @@ fi
 export IGNOREPING=true
 
 export ARCHFLAGS="-arch x86_64"
+
+export PATH="/Users/mauricio/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin"
 
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
