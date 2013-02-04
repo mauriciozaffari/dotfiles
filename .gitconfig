@@ -1,6 +1,6 @@
 [core]
-	excludesfile = .gitignore
-	editor = mate -w
+	excludesfile = /Users/mauricio/.gitignore
+	editor = subl -w
 [alias]
 	st = status
 	cp = cherry-pick

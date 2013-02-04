@@ -1,37 +1,27 @@
-alias dpy='git add . && git commit -a -v && git push && cap deploy'
-alias na='mate -w ~/.bash_aliases && source ~/.bash_aliases'
-alias la='ls -la'
-alias l='ls -aFhlG'
-alias ll='ls -l'
-alias ..='cd ..'
-alias ...='cd ../..'
-function -() { cd -; }
-alias c='clear'
-alias p='pwd'
-alias m='mate .'
-
-# Change to home dir
-alias ch='cd ~'
-
-# Change to rails dir
-alias crails='cd ~/Sites/rails'
-alias cr='crails'
-
-# Change to github dir
-alias cgithub='cd ~/Github'
-alias cg='cgithub'
+alias na='subl -w ~/.bash_aliases && source ~/.bash_aliases'
+alias z='zeus'
 
 # Rails alias
-alias r='rails'
-alias rs='rake spec'
+alias r='bundle exec rails'
+alias rake='bundle exec rake'
+alias rs='bundle exec rake spec'
+alias rcov='bundle exec rake spec COVERAGE=true && open coverage/index.html'
 
 # Git alias
 alias g='git'
 
-# Tail rails log files
-alias td='tail -f log/development.log'
-alias tp='tail -f log/production.log'
+# PostgreSQL start
+alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 
-# Restart passenger
-alias rr='touch tmp/restart.txt'
+# MongoDB start
+alias mongostart='mongod run --config /usr/local/Cellar/mongodb/2.0.2-x86_64/mongod.conf'
 
+# Simmetry aliases
+alias sy='symmetry'
+alias so='sy open'
+alias sp='sy push'
+alias sl='sy pull'
+alias slp='sl && sp'
+alias spr='sy pr'
+alias sf='sy fork'
+alias su='sy upstream'

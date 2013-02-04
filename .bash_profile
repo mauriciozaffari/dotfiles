@@ -35,10 +35,29 @@ end tell
 }
 
 dns() {
-  dig soa $1 | grep -q ^$1 && 
-  echo "Registered" || 
+  dig soa $1 | grep -q ^$1 &&
+  echo "Registered" ||
   echo "Available"
 }
+
+delete_branch() {
+  git push origin :$1 && git branch -D $1
+}
+
+gp() {
+  current_branch=`git branch | grep \* | awk '{print $2}'`
+  git push origin $current_branch $1
+}
+
+cr() {
+  cd "/Users/mauricio/Sites/rails/$1"
+}
+
+_cr()
+{
+  _filedir '/Users/mauricio/Sites/rails/'
+}
+complete -o default -o nospace -F _cr cr
 
 export AUTOFEATURE=true
 
@@ -47,7 +66,7 @@ PS1=''
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color|screen)
+xterm-color|screen|xterm-256color)
     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[01;35m\] [$(parse_git_branch), $(ruby -e "print RUBY_VERSION")]\[\033[00m\]\$ '
     ;;
 *)
@@ -88,6 +107,11 @@ export IGNOREPING=true
 
 export ARCHFLAGS="-arch x86_64"
 
+export EDITOR="subl"
+
 export PATH="/Users/mauricio/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin"
 
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+eval "$($HOME/.symmetry/bin/symmetry init -)"
