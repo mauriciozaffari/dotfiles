@@ -18,20 +18,10 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-nt() {
-  terminal_clone_command="
-tell application \"Terminal\"
-tell application \"System Events\" to tell process \"Terminal\" to keystroke \"n\" using command down
-do script with command \"cd `pwd`\" in selected tab of the front window
-do script with command \"rvm `ruby -e "print RUBY_VERSION"`\" in selected tab of the front window
-do script with command \"clear\" in selected tab of the front window
-end tell
-"
-  echo "$terminal_clone_command" | osascript &>/dev/null
-  clear
+  git_branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ $git_branch ]; then
+    echo "$git_branch, "
+  fi
 }
 
 dns() {
@@ -50,12 +40,12 @@ gp() {
 }
 
 cr() {
-  cd "/Users/mauricio/Sites/rails/$1"
+  cd "/Users/$(whoami)/Development/rails/$1"
 }
 
 _cr()
 {
-  _filedir '/Users/mauricio/Sites/rails/'
+  _filedir '/Users/$(whoami)/Development/rails/'
 }
 complete -o default -o nospace -F _cr cr
 
@@ -67,7 +57,7 @@ PS1=''
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 xterm-color|screen|xterm-256color)
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[01;35m\] [$(parse_git_branch), $(ruby -e "print RUBY_VERSION")]\[\033[00m\]\$ '
+    PS1='\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;94m\]\w\[\033[1;91m\] [$(parse_git_branch)$(ruby -e "print RUBY_VERSION")]\[\033[00m\]\$ '
     ;;
 *)
     PS1='\u@\h:\w $(parse_git_branch)\$ '
@@ -103,15 +93,20 @@ if [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
 fi
 
+# History tweaks
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+shopt -s histappend
+
 export IGNOREPING=true
-
 export ARCHFLAGS="-arch x86_64"
-
 export EDITOR="subl"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin"
+export RUBY_GC_MALLOC_LIMIT=60000000
+export RUBY_FREE_MIN=200000
+export CFLAGS="-march=nocona -O2 -pipe -fomit-frame-pointer"
 
-export PATH="/Users/mauricio/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin"
-
-if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-eval "$($HOME/.symmetry/bin/symmetry init -)"
+
+eval "$(rbenv init -)"
