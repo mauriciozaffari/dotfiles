@@ -1,0 +1,15 @@
+# Docker Helpers v0.3
+alias dc="docker-compose"
+alias dcrs="dc restart --no-deps"
+alias dclogs="dc logs -f"
+alias dcr="dc run --rm --entrypoint=''"
+alias dr="d rails"
+alias drc="d rails console"
+alias db="d bundle"
+alias dbe="d bundle exec"
+alias drake="dbe rake"
+alias drmg="dr db:migrate"
+alias drgm="dr g migration"
+
+appcontainer-name () { docker-compose ps --services -a | awk -F/ '/app|api/ {print $(NF-1)}'; }
+d () { dcr $(appcontainer-name) "$@"; }

@@ -1,0 +1,71 @@
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US:en'
+export LC_ALL='en_US.UTF-8'
+[ -z "xterm-256color" ] && export TERM=xterm
+
+##### Zsh/Oh-my-Zsh Configuration
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(asdf bundler rake ruby rails docker docker-compose git zsh-autosuggestions zsh-completions)
+
+source $ZSH/oh-my-zsh.sh
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_STATUS_OK=false
+POWERLEVEL9K_STATUS_CROSS=true
+
+if [[ -z "$EDITOR" ]]; then
+    if command -v code &>/dev/null; then
+        export EDITOR='code --wait'
+    else
+        export EDITOR='nano'
+    fi
+fi
+
+# Aliases
+alias zshconfig="$EDITOR ~/.zshrc; source ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+alias dev="cd ~/development"
+
+function prompt_environment() {
+    p10k segment -s "${ENVIRONMENT:u}" -f white -b blue -t "${ENVIRONMENT}"
+}
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(environment command_execution_time background_jobs)
+POWERLEVEL9K_ENVIRONMENT_DEV_BACKGROUND=green
+POWERLEVEL9K_ENVIRONMENT_TEST_BACKGROUND=yellow
+POWERLEVEL9K_ENVIRONMENT_PROD_BACKGROUND=red
+
+# Start SSH agent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    # Check if ssh-agent is already running
+    eval "$(ssh-agent -s)" > /dev/null
+fi
+
+# Add SSH keys if they exist
+if [ -f ~/.ssh/id_rsa ]; then
+    ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_rsa >/dev/null 2>&1
+fi
+
+if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519 >/dev/null 2>&1
+fi
+
+export COMPOSE_BAKE=true
+
+export PATH="$HOME/.local/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# Load Docker Helpers
+if [ -f ~/.docker_helpers ]; then
+    . ~/.docker_helpers
+fi
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+
+# Load secrets (API keys, tokens, etc.)
+if [ -f ~/.secrets ]; then
+    . ~/.secrets
+fi

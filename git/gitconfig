@@ -1,0 +1,46 @@
+[user]
+        # Set via: git config --global user.email "you@example.com"
+        # Set via: git config --global user.name "Your Name"
+[alias]
+        co = checkout
+        ci = commit
+        st = status
+        cp = cherry-pick
+        unstage = reset HEAD --
+        undo = reset HEAD~
+[credential "https://github.com"]
+        helper = !/usr/bin/gh auth git-credential
+[push]
+        autoSetupRemote = true
+        default = simple
+[pull]
+        rebase = true
+[filter "lfs"]
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
+[core]
+        attributesfile = ~/.gitattributes
+        excludesfile = ~/.gitignore
+[commit]
+        verbose = true
+[diff]
+        algorithm = histogram
+[init]
+        defaultBranch = main
+[tag]
+        sort = version:refname
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[help]
+        autocorrect = prompt
+[rerere]
+        enabled = true
+        autoupdate = true
+[rebase]
+        updateRefs = true
+[merge]
+        conflictstyle = zdiff3

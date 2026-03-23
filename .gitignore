@@ -1,7 +1,17 @@
+# Secrets - NEVER commit
+secrets
+*.secrets
+
+# OS
 .DS_Store
-.gitconfig
-.rvmrc
-dump.rdp
-*.rdb
-custom_plan.rb
-zeus.json
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Node (for opencode plugins)
+node_modules/
+package.json
+bun.lock

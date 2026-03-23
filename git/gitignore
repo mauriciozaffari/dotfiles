@@ -1,0 +1,13 @@
+.sourcegraph
+.cursor
+.windsurfrules
+.claude
+AGENT.md
+CLAUDE.md
+GEMINI.md
+CURSOR.md
+.windsurf
+local/
+
+# temporary until I finish the docs
+docs/how-to/
