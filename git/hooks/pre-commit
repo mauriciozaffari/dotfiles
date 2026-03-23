@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+HOOK_REAL="$(readlink -f "$0")"
+LIB_DIR="$(dirname "$HOOK_REAL")/lib"
+
+source "$LIB_DIR/pre_commit.sh"
+pre_commit_main
+exit $?

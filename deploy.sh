@@ -2,9 +2,14 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
-BACKUP_BASE="$HOME/.dotfiles_backup"
+STATE_DIR="$HOME/.dotfiles"
+BACKUP_BASE="$STATE_DIR/backups"
 BACKUP_DIR="$BACKUP_BASE/$(date +%Y%m%d_%H%M%S)"
 MANIFEST=""  # tracks backed-up files for rollback
+
+HOOKS_DIR="$DOTFILES/git/hooks"
+HOOKS_INSTALLED_FILE="$STATE_DIR/hooks_installed"  # projects that opted in
+HOOKS_SKIPPED_FILE="$STATE_DIR/hooks_skipped"      # projects that opted out forever
 
 info()  { printf "\033[0;34m[info]\033[0m  %s\n" "$1"; }
 ok()    { printf "\033[0;32m[ok]\033[0m    %s\n" "$1"; }
@@ -116,11 +121,182 @@ save_manifest() {
 }
 
 # ──────────────────────────────────────────────────
+# Git hooks helpers
+# ──────────────────────────────────────────────────
+is_in_file() {
+    local needle="$1" file="$2"
+    [ -f "$file" ] && grep -qFx "$needle" "$file" 2>/dev/null
+}
+
+add_to_file() {
+    local line="$1" file="$2"
+    is_in_file "$line" "$file" && return
+    echo "$line" >> "$file"
+}
+
+remove_from_file() {
+    local line="$1" file="$2"
+    [ -f "$file" ] || return 0
+    local tmp
+    tmp="$(mktemp)"
+    grep -vFx "$line" "$file" > "$tmp" 2>/dev/null || true
+    mv "$tmp" "$file"
+}
+
+install_hooks_to_project() {
+    # Resolve actual git dir (submodules have a .git file, not a directory)
+    local git_dir
+    git_dir="$(git -C "$1" rev-parse --git-dir 2>/dev/null)" || return 1
+
+    # Make absolute if relative
+    case "$git_dir" in
+        /*) ;;
+        *)  git_dir="$1/$git_dir" ;;
+    esac
+
+    local project_hooks="$git_dir/hooks"
+
+    for hook in "$HOOKS_DIR"/*; do
+        [ -f "$hook" ] || continue
+        local name
+        name="$(basename "$hook")"
+        local dst="$project_hooks/$name"
+
+        if [ -L "$dst" ]; then
+            local current
+            current="$(readlink "$dst")"
+            if [ "$current" = "$hook" ]; then
+                continue  # already linked, silent
+            fi
+            backup_file "$dst"
+            rm "$dst"
+        elif [ -e "$dst" ]; then
+            backup_file "$dst"
+            rm "$dst"
+        fi
+
+        ln -s "$hook" "$dst"
+    done
+}
+
+deploy_hooks() {
+    local hook_files=()
+    for f in "$HOOKS_DIR"/*; do
+        [ -f "$f" ] && hook_files+=("$(basename "$f")")
+    done
+
+    if [ ${#hook_files[@]} -eq 0 ]; then
+        return
+    fi
+
+    echo ""
+    info "Git hooks: ${hook_files[*]}"
+    echo ""
+
+    # Ensure state files exist
+    touch "$HOOKS_INSTALLED_FILE" "$HOOKS_SKIPPED_FILE"
+
+    # 1. Update hooks in already-installed projects
+    local updated=0
+    while IFS= read -r project; do
+        [ -z "$project" ] && continue
+        if [ -d "$project" ] && git -C "$project" rev-parse --git-dir &>/dev/null; then
+            install_hooks_to_project "$project"
+            updated=$((updated + 1))
+        else
+            warn "$project is no longer a git repo, removing from installed list"
+            remove_from_file "$project" "$HOOKS_INSTALLED_FILE"
+        fi
+    done < "$HOOKS_INSTALLED_FILE"
+
+    if [ "$updated" -gt 0 ]; then
+        ok "Updated hooks in $updated installed project(s)"
+    fi
+
+    # 2. Discover new projects in ~/development
+    local dev_dir="$HOME/development"
+    if [ ! -d "$dev_dir" ]; then
+        return
+    fi
+
+    # Find all git repos (including submodules which have .git as a file)
+    local new_projects=()
+    while IFS= read -r gitdir; do
+        local project
+        project="$(dirname "$gitdir")"
+
+        # Skip if already installed or permanently skipped
+        is_in_file "$project" "$HOOKS_INSTALLED_FILE" && continue
+        is_in_file "$project" "$HOOKS_SKIPPED_FILE" && continue
+
+        new_projects+=("$project")
+    done < <(find "$dev_dir" -name ".git" -maxdepth 3 2>/dev/null | sort)
+
+    if [ ${#new_projects[@]} -eq 0 ]; then
+        return
+    fi
+
+    echo ""
+    info "Found ${#new_projects[@]} project(s) without hooks:"
+    echo ""
+
+    for project in "${new_projects[@]}"; do
+        local rel="${project#$HOME/}"
+        echo "  $rel"
+    done
+
+    echo ""
+    echo "  i) Install hooks in all listed projects"
+    echo "  s) Skip all for this run"
+    echo "  p) Pick individually"
+    echo ""
+    read -rp "Choose [i/s/p]: " bulk_choice
+
+    case "$bulk_choice" in
+        i|I)
+            for project in "${new_projects[@]}"; do
+                install_hooks_to_project "$project"
+                add_to_file "$project" "$HOOKS_INSTALLED_FILE"
+                ok "Installed hooks in ${project#$HOME/}"
+            done
+            ;;
+        p|P)
+            for project in "${new_projects[@]}"; do
+                local rel="${project#$HOME/}"
+                echo ""
+                echo "  $rel"
+                echo "    y) Install    s) Skip this run    n) Never install"
+                read -rp "  Choose [y/s/n]: " pick
+                case "$pick" in
+                    y|Y)
+                        install_hooks_to_project "$project"
+                        add_to_file "$project" "$HOOKS_INSTALLED_FILE"
+                        ok "Installed hooks in $rel"
+                        ;;
+                    n|N)
+                        add_to_file "$project" "$HOOKS_SKIPPED_FILE"
+                        warn "Permanently skipped $rel"
+                        ;;
+                    *)
+                        info "Skipped $rel for this run"
+                        ;;
+                esac
+            done
+            ;;
+        *)
+            info "Skipping hook installation for this run"
+            ;;
+    esac
+}
+
+# ──────────────────────────────────────────────────
 # Entry point
 # ──────────────────────────────────────────────────
 if [ "${1:-}" = "--rollback" ]; then
     do_rollback
 fi
+
+mkdir -p "$STATE_DIR"
 
 echo ""
 echo "Deploying dotfiles from $DOTFILES"
@@ -193,6 +369,9 @@ if [ ! -f "$HOME/.secrets" ]; then
     chmod 600 "$HOME/.secrets"
     info "Edit ~/.secrets to add your API keys and tokens"
 fi
+
+# Git hooks
+deploy_hooks
 
 # Save manifest for rollback
 save_manifest

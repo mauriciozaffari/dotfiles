@@ -135,9 +135,13 @@ bash "$DOTFILES_DIR/deploy.sh"
 # 8. Configure git identity
 # --------------------------------------------------
 info "Configuring git identity..."
-git config --global user.name "$GIT_NAME"
-git config --global user.email "$GIT_EMAIL"
-ok "Git identity set to $GIT_NAME <$GIT_EMAIL>"
+cat > "$HOME/.gitconfig.local" <<EOF
+[user]
+        name = $GIT_NAME
+        email = $GIT_EMAIL
+EOF
+chmod 600 "$HOME/.gitconfig.local"
+ok "Git identity saved to ~/.gitconfig.local"
 
 # --------------------------------------------------
 # 9. Set default shell

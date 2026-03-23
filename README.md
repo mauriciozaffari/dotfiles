@@ -18,7 +18,7 @@ After making changes to files in this repo:
 ~/dotfiles/deploy.sh
 ```
 
-This creates symlinks from your home directory to the repo files. Any existing files that would be overwritten are backed up to `~/.dotfiles_backup/<timestamp>/` with a manifest for rollback.
+This creates symlinks from your home directory to the repo files. Any existing files that would be overwritten are backed up to `~/.dotfiles/backups/<timestamp>/` with a manifest for rollback.
 
 ## Rollback
 
@@ -39,7 +39,13 @@ dotfiles/
 │   └── docker_helpers     -> ~/.docker_helpers
 ├── git/
 │   ├── gitconfig          -> ~/.gitconfig
-│   └── gitignore          -> ~/.gitignore
+│   ├── gitignore          -> ~/.gitignore
+│   └── hooks/             -> project .git/hooks/ (symlinked per-project)
+│       ├── pre-commit
+│       ├── prepare-commit-msg
+│       └── lib/
+│           ├── config.sh, configure.sh, diff.sh, prompt.sh, sanitize.sh, ticket.sh
+│           └── providers/  (opencode.sh, claude.sh, codex.sh)
 ├── tools/
 │   ├── asdfrc             -> ~/.asdfrc
 │   ├── tool-versions      -> ~/.tool-versions
@@ -73,13 +79,47 @@ chmod 600 ~/.secrets
 $EDITOR ~/.secrets
 ```
 
+## Git Hooks
+
+The deploy script manages shared git hooks across projects in `~/development/`.
+
+**Hooks provided:**
+- **`pre-commit`** -- Blocks commits with failing RSpec tests or RuboCop offenses
+- **`prepare-commit-msg`** -- Extracts ticket numbers from branch names and generates AI commit messages
+
+**How it works:**
+- Hook entry points are symlinked into each project's `.git/hooks/`
+- They resolve back to `dotfiles/git/hooks/lib/` for the actual logic
+- Edits to dotfiles hooks propagate instantly to all projects (no re-deploy needed)
+
+**AI commit messages:**
+On first commit in a project, a configuration wizard runs:
+1. Select which AI tools to use (OpenCode, Claude CLI, Codex CLI)
+2. Install any missing tools
+3. Authenticate with providers (e.g., OpenCode OAuth)
+4. Choose models per tool
+5. Set priority order (1-5 provider/model pairs)
+
+Config is saved per-project in `.git/commit-ai.conf`. The hook tries each provider/model in priority order, using the lowest reasoning variant for speed.
+
+To reconfigure a project, delete `.git/commit-ai.conf` and commit again.
+
+**Deploy state** is stored in `~/.dotfiles/`:
+- `hooks_installed` -- projects with hooks installed
+- `hooks_skipped` -- projects permanently skipped
+
+To re-enable a permanently skipped project, remove its line from `~/.dotfiles/hooks_skipped`.
+
 ## Git Identity
 
-Git user name and email are not stored in the repo. The setup script prompts for them. To set manually:
+Git user name and email are not stored in the repo. The repo-managed `~/.gitconfig` includes `~/.gitconfig.local`, and the setup script writes identity there. To set manually:
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
+cat > ~/.gitconfig.local <<'EOF'
+[user]
+        name = Your Name
+        email = you@example.com
+EOF
 ```
 
 ## Stack
