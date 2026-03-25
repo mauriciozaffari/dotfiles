@@ -46,3 +46,5 @@
         updateRefs = true
 [merge]
         conflictstyle = zdiff3
+[submodule]
+	recurse = true

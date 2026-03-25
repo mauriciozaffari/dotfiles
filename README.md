@@ -84,13 +84,15 @@ $EDITOR ~/.secrets
 The deploy script manages shared git hooks across projects in `~/development/`.
 
 **Hooks provided:**
-- **`pre-commit`** -- Blocks commits with failing RSpec tests or RuboCop offenses
+- **`pre-commit`** -- Auto-detects common project checks (YAML/JSON syntax, RuboCop, Biome, Jest) and supports per-project extensions
 - **`prepare-commit-msg`** -- Extracts ticket numbers from branch names and generates AI commit messages
 
 **How it works:**
 - Hook entry points are symlinked into each project's `.git/hooks/`
 - They resolve back to `dotfiles/git/hooks/lib/` for the actual logic
 - Edits to dotfiles hooks propagate instantly to all projects (no re-deploy needed)
+- `pre-commit` is split into focused modules under `git/hooks/lib/pre_commit/`
+- Optional project-specific checks can live in `.githooks/pre-commit.local.sh` or `.git/pre-commit.local.sh`; they must define `pre_commit_project_checks` and load without top-level errors
 
 **AI commit messages:**
 On first commit in a project, a configuration wizard runs:
