@@ -2,6 +2,7 @@
 .cursor
 .windsurfrules
 .claude
+.opencode
 AGENT.md
 CLAUDE.md
 GEMINI.md

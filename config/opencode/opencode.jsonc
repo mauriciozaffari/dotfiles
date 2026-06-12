@@ -1,13 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
+    "oh-my-openagent@latest",
     "opencode-claude-auth@latest",
-    "oh-my-openagent"
+    "opencode-antigravity-auth@latest"
   ],
   "mcp": {
-    "atlassian": {
-      "type": "remote",
-      "url": "https://mcp.atlassian.com/v1/sse",
+    "agentmemory": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@agentmemory/mcp"
+      ],
       "enabled": true
     }
   }

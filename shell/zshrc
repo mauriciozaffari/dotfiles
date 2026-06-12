@@ -12,7 +12,6 @@ plugins=(asdf bundler rake ruby rails docker docker-compose git zsh-autosuggesti
 source $ZSH/oh-my-zsh.sh
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_STATUS_OK=false
 POWERLEVEL9K_STATUS_CROSS=true
 
@@ -28,6 +27,7 @@ fi
 alias zshconfig="$EDITOR ~/.zshrc; source ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 alias dev="cd ~/development"
+alias tm='tmux new -A -s "$(basename "$PWD")"'
 
 function prompt_environment() {
     p10k segment -s "${ENVIRONMENT:u}" -f white -b blue -t "${ENVIRONMENT}"
@@ -69,3 +69,7 @@ export PATH=$HOME/.opencode/bin:$PATH
 if [ -f ~/.secrets ]; then
     . ~/.secrets
 fi
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
