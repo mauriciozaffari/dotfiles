@@ -53,17 +53,33 @@ fi
 # --------------------------------------------------
 # 1. System packages
 # --------------------------------------------------
-info "Installing system packages..."
-sudo apt update -qq
-sudo apt install -y -qq \
-    git curl wget \
-    zsh \
-    build-essential \
-    htop \
-    docker.io docker-compose-v2 \
-    gh \
-    >/dev/null 2>&1
-ok "System packages installed"
+PACKAGES=(
+    git
+    curl
+    wget
+    zsh
+    build-essential
+    htop
+    docker.io
+    docker-compose-v2
+    gh
+)
+
+MISSING_PACKAGES=()
+for package in "${PACKAGES[@]}"; do
+    if ! dpkg -s "$package" >/dev/null 2>&1; then
+        MISSING_PACKAGES+=("$package")
+    fi
+done
+
+if [ ${#MISSING_PACKAGES[@]} -eq 0 ]; then
+    ok "System packages already installed"
+else
+    info "Installing system packages..."
+    sudo apt update -qq
+    sudo apt install -y -qq "${MISSING_PACKAGES[@]}" >/dev/null 2>&1
+    ok "System packages installed"
+fi
 
 # --------------------------------------------------
 # 2. Oh-My-Zsh
