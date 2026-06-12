@@ -60,8 +60,11 @@ PACKAGES=(
     zsh
     build-essential
     htop
-    docker.io
-    docker-compose-v2
+    docker-ce
+    docker-ce-cli
+    containerd.io
+    docker-buildx-plugin
+    docker-compose-plugin
     gh
 )
 
