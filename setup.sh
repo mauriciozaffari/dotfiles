@@ -10,6 +10,19 @@ ok()    { printf "\033[0;32m[ok]\033[0m    %s\n" "$1"; }
 warn()  { printf "\033[0;33m[warn]\033[0m  %s\n" "$1"; }
 fail()  { printf "\033[0;31m[fail]\033[0m  %s\n" "$1"; exit 1; }
 
+read_tty() {
+    local prompt="$1"
+    local var_name="$2"
+    local value=""
+
+    if [ ! -r /dev/tty ]; then
+        fail "Interactive input requires a terminal. Set GIT_NAME and GIT_EMAIL environment variables for non-interactive setup."
+    fi
+
+    read -rp "$prompt" value < /dev/tty || value=""
+    printf -v "$var_name" '%s' "$value"
+}
+
 DOTFILES_REPO="https://github.com/mauriciozaffari/dotfiles.git"
 DOTFILES_DIR="$HOME/dotfiles"
 
@@ -22,8 +35,16 @@ echo ""
 # --------------------------------------------------
 # 0. Collect user info
 # --------------------------------------------------
-read -rp "Git name (e.g. Your Name): " GIT_NAME
-read -rp "Git email (e.g. you@example.com): " GIT_EMAIL
+GIT_NAME="${GIT_NAME:-}"
+GIT_EMAIL="${GIT_EMAIL:-}"
+
+if [ -z "$GIT_NAME" ]; then
+    read_tty "Git name (e.g. Your Name): " GIT_NAME
+fi
+
+if [ -z "$GIT_EMAIL" ]; then
+    read_tty "Git email (e.g. you@example.com): " GIT_EMAIL
+fi
 
 if [ -z "$GIT_NAME" ] || [ -z "$GIT_EMAIL" ]; then
     fail "Git name and email are required"
@@ -178,7 +199,7 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
     echo "  2) Copy from another system (paste private key)"
     echo "  3) Skip for now"
     echo ""
-    read -rp "Choose [1/2/3]: " SSH_CHOICE
+    read_tty "Choose [1/2/3]: " SSH_CHOICE
 
     case "$SSH_CHOICE" in
         1)
@@ -193,11 +214,11 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
         2)
             echo ""
             info "Paste your private key below, then press Enter and Ctrl+D:"
-            cat > "$HOME/.ssh/id_ed25519"
+            cat < /dev/tty > "$HOME/.ssh/id_ed25519"
             chmod 600 "$HOME/.ssh/id_ed25519"
             ok "Private key saved to ~/.ssh/id_ed25519"
             echo ""
-            read -rp "Paste your public key (or press Enter to derive it): " SSH_PUB
+            read_tty "Paste your public key (or press Enter to derive it): " SSH_PUB
             if [ -n "$SSH_PUB" ]; then
                 echo "$SSH_PUB" > "$HOME/.ssh/id_ed25519.pub"
             else
