@@ -188,7 +188,11 @@ ok "Git identity saved to ~/.gitconfig.local"
 # --------------------------------------------------
 if [ "$SHELL" != "$(which zsh)" ]; then
     info "Setting Zsh as default shell..."
-    chsh -s "$(which zsh)"
+    if command -v script >/dev/null 2>&1; then
+        script -qec "chsh -s \"$(which zsh)\"" /dev/null
+    else
+        chsh -s "$(which zsh)"
+    fi
     ok "Default shell changed to Zsh"
 else
     ok "Zsh is already the default shell"
