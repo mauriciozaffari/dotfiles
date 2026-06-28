@@ -331,6 +331,7 @@ echo ""
 info "XDG config files"
 link_file "$DOTFILES/config/git/ignore"   "$HOME/.config/git/ignore"
 link_file "$DOTFILES/config/htop/htoprc"  "$HOME/.config/htop/htoprc"
+link_file "$DOTFILES/config/tmux/tmux.conf" "$HOME/.tmux.conf"
 echo ""
 
 # OpenCode

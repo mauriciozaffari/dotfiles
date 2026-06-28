@@ -55,6 +55,7 @@ dotfiles/
 ├── config/
 │   ├── git/ignore         -> ~/.config/git/ignore
 │   ├── htop/htoprc        -> ~/.config/htop/htoprc
+│   ├── tmux/tmux.conf     -> ~/.tmux.conf
 │   └── opencode/          -> ~/.config/opencode/
 │       ├── AGENTS.md
 │       ├── opencode.jsonc

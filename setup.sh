@@ -60,6 +60,7 @@ PACKAGES=(
     zsh
     build-essential
     htop
+    tmux
     docker-ce
     docker-ce-cli
     containerd.io
