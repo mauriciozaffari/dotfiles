@@ -14,7 +14,7 @@ This is a home directory, not a project repository. Sessions here typically invo
 - `~/.zshrc` - Shell configuration
 - `~/.gitconfig` - Git configuration
 - `~/.tool-versions` - asdf version pinning
-- `~/.docker_helpers` - Docker/docker-compose aliases
+- `~/.docker_helpers` - Docker Compose aliases
 - `~/.config/` - XDG config directory
 
 ## Useful Aliases
@@ -22,8 +22,8 @@ This is a home directory, not a project repository. Sessions here typically invo
 ```bash
 dev          # cd ~/development
 zshconfig    # edit and reload .zshrc
-dc           # docker-compose
-dcr          # docker-compose run --rm --entrypoint=''
+dc           # docker compose
+dcr          # docker compose run --rm --entrypoint=''
 d            # run command in app/api container
 ```
 

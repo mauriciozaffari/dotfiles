@@ -129,5 +129,5 @@ EOF
 
 - **Shell**: Zsh + Oh-My-Zsh + Powerlevel10k
 - **Version Manager**: asdf (Node.js, Ruby, uv)
-- **Containers**: Docker + docker-compose
+- **Containers**: Docker + Docker Compose v2 (`docker compose`)
 - **AI Tools**: OpenCode, Claude Code
