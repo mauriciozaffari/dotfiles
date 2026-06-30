@@ -94,18 +94,21 @@ backup_file() {
 link_file() {
     local src="$1" dst="$2"
 
+    local real_src real_dst
+    real_src="$(realpath "$src" 2>/dev/null || echo "$src")"
+    real_dst="$(realpath "$dst" 2>/dev/null || echo "")"
+
+    if [ "$real_src" = "$real_dst" ]; then
+        ok "$dst (already linked)"
+        return
+    fi
+
     if [ -L "$dst" ]; then
-        local current
-        current="$(readlink "$dst")"
-        if [ "$current" = "$src" ]; then
-            ok "$dst (already linked)"
-            return
-        fi
         backup_file "$dst"
-        rm "$dst"
+        rm -rf "$dst"
     elif [ -e "$dst" ]; then
         backup_file "$dst"
-        rm "$dst"
+        rm -rf "$dst"
     fi
 
     mkdir -p "$(dirname "$dst")"
@@ -348,11 +351,9 @@ done
 
 for skill_dir in "$DOTFILES/config/opencode/skills/"*/; do
     [ -d "$skill_dir" ] || continue
+    skill_dir="${skill_dir%/}"
     local_name="$(basename "$skill_dir")"
-    for file in "$skill_dir"*; do
-        [ -e "$file" ] || continue
-        link_file "$file" "$HOME/.config/opencode/skills/$local_name/$(basename "$file")"
-    done
+    link_file "$skill_dir" "$HOME/.config/opencode/skills/$local_name"
 done
 echo ""
 
