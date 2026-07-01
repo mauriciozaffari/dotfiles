@@ -13,6 +13,9 @@
         "-y",
         "@agentmemory/mcp"
       ],
+      "environment": {
+        "ASDF_NODEJS_VERSION": "24.18.0"
+      },
       "enabled": true
     }
   },
