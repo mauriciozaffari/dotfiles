@@ -17,6 +17,15 @@
         "ASDF_NODEJS_VERSION": "24.18.0"
       },
       "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp"
+      ],
+      "enabled": true
     }
   },
   "provider": {
