@@ -59,6 +59,7 @@ dotfiles/
 │   └── opencode/          -> ~/.config/opencode/
 │       ├── AGENTS.md
 │       ├── opencode.jsonc
+│       ├── oh-my-openagent.json
 │       ├── plugin/
 │       ├── agent/
 │       └── skills/
