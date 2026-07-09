@@ -211,6 +211,11 @@ pre_commit_script_is_biome_command() {
 pre_commit_check_biome() {
     [ -f package.json ] || return 0
 
+    local -a biome_files=()
+    pre_commit_collect_staged_files biome_files '*.js' '*.jsx' '*.ts' '*.tsx' '*.json' '*.jsonc' '*.css'
+
+    [ ${#biome_files[@]} -eq 0 ] && return 0
+
     local package_manager
     package_manager="$(pre_commit_node_package_manager)"
 
