@@ -1,6 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
-  "telemetry": false,
   "codegraph": {
     "auto_init": true,
     "auto_provision": true,
@@ -13,7 +12,16 @@
   "model_fallback": true,
   "runtime_fallback": {
     "enabled": true,
-    "retry_on_errors": [408, 409, 429, 500, 502, 503, 504, 529],
+    "retry_on_errors": [
+      408,
+      409,
+      429,
+      500,
+      502,
+      503,
+      504,
+      529
+    ],
     "max_fallback_attempts": 6,
     "cooldown_seconds": 300,
     "timeout_seconds": 120,
@@ -35,11 +43,12 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "anthropic/claude-opus-4-8",
-      "reasoningEffort": "medium",
+      "model": "openrouter/z-ai/glm-5.2",
+      "reasoningEffort": "high",
       "fallback_models": [
-        { "model": "openai/gpt-5.6-sol", "reasoningEffort": "high" },
-        { "model": "google/antigravity-gemini-3.1-pro", "reasoningEffort": "medium" },
+        "anthropic/claude-opus-4-8",
+        "openai/gpt-5.6-sol",
+        "google/antigravity-gemini-3.1-pro",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -49,6 +58,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/north-mini-code-free"
       ]
     },
@@ -58,6 +68,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
         "anthropic/claude-opus-4-8",
+        "openrouter/z-ai/glm-5.2",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -66,14 +77,19 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
-        "opencode/deepseek-v4-flash-free"
+        "opencode/deepseek-v4-flash-free",
+        "openrouter/z-ai/glm-5.2"
       ]
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3.5-flash",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
-        { "model": "openai/gpt-5.6-terra", "reasoningEffort": "high" },
+        "openrouter/z-ai/glm-5.2",
+        {
+          "model": "openai/gpt-5.6-terra",
+          "reasoningEffort": "high"
+        },
         "anthropic/claude-sonnet-5"
       ]
     },
@@ -82,14 +98,16 @@
       "reasoningEffort": "max",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
+        "openrouter/z-ai/glm-5.2",
         "anthropic/claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
     },
     "metis": {
-      "model": "anthropic/claude-opus-4-8",
+      "model": "openrouter/z-ai/glm-5.2",
       "fallback_models": [
-        { "model": "openai/gpt-5.6-sol", "reasoningEffort": "max" },
+        "anthropic/claude-opus-4-8",
+        "openai/gpt-5.6-sol",
         "google/antigravity-gemini-3.1-pro",
         "opencode/nemotron-3-ultra-free"
       ]
@@ -99,6 +117,7 @@
       "reasoningEffort": "xhigh",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
+        "openrouter/z-ai/glm-5.2",
         "anthropic/claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
@@ -107,6 +126,7 @@
       "model": "openai/gpt-5.6-sol",
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
+        "openrouter/z-ai/glm-5.2",
         "anthropic/claude-sonnet-5",
         "opencode/deepseek-v4-flash-free"
       ]
@@ -116,6 +136,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/north-mini-code-free"
       ]
     }
@@ -124,8 +145,9 @@
     "visual-engineering": {
       "model": "google/antigravity-gemini-3.5-flash",
       "fallback_models": [
-        { "model": "openai/gpt-5.6-sol", "reasoningEffort": "high" },
+        "openai/gpt-5.6-sol",
         "anthropic/claude-opus-4-8",
+        "openrouter/z-ai/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -134,6 +156,7 @@
       "reasoningEffort": "xhigh",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
+        "openrouter/z-ai/glm-5.2",
         "anthropic/claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
@@ -144,13 +167,15 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
     "artistry": {
       "model": "google/antigravity-gemini-3.1-pro",
       "fallback_models": [
-        { "model": "openai/gpt-5.6-sol", "reasoningEffort": "high" },
+        "openai/gpt-5.6-sol",
+        "openrouter/z-ai/glm-5.2",
         "anthropic/claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
@@ -160,6 +185,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -168,7 +194,8 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "openai/gpt-5.6-luna",
-        "anthropic/claude-haiku-4-5"
+        "anthropic/claude-haiku-4-5",
+        "openrouter/z-ai/glm-5.2"
       ]
     },
     "unspecified-high": {
@@ -176,14 +203,16 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
     "writing": {
       "model": "google/antigravity-gemini-3.5-flash",
       "fallback_models": [
-        { "model": "openai/gpt-5.6-sol", "reasoningEffort": "medium" },
+        "openai/gpt-5.6-sol",
         "anthropic/claude-sonnet-5",
+        "openrouter/z-ai/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     }

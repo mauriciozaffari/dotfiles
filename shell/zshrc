@@ -55,7 +55,7 @@ fi
 
 export COMPOSE_BAKE=true
 
-export PATH="$HOME/.local/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Load Docker Helpers
 if [ -f ~/.docker_helpers ]; then
