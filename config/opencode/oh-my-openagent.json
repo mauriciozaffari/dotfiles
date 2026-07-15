@@ -43,10 +43,11 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "openrouter/z-ai/glm-5.2",
+      "model": "ollama-cloud/glm-5.2",
       "reasoningEffort": "high",
       "fallback_models": [
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "openai/gpt-5.6-sol",
         "google/antigravity-gemini-3.1-pro",
         "opencode/nemotron-3-ultra-free"
@@ -58,7 +59,8 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-sonnet-4-6",
+        "ollama-cloud/glm-5.2",
         "opencode/north-mini-code-free"
       ]
     },
@@ -68,7 +70,8 @@
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
         "anthropic/claude-opus-4-8",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-opus-4-8",
+        "ollama-cloud/glm-5.2",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -78,19 +81,17 @@
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
         "opencode/deepseek-v4-flash-free",
-        "openrouter/z-ai/glm-5.2"
+        "ollama-cloud/glm-5.2"
       ]
     },
     "multimodal-looker": {
       "model": "google/antigravity-gemini-3.5-flash",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
-        "openrouter/z-ai/glm-5.2",
-        {
-          "model": "openai/gpt-5.6-terra",
-          "reasoningEffort": "high"
-        },
-        "anthropic/claude-sonnet-5"
+        "ollama-cloud/glm-5.2",
+        "openai/gpt-5.6-terra",
+        "anthropic/claude-sonnet-5",
+        "google/antigravity-claude-sonnet-4-6"
       ]
     },
     "prometheus": {
@@ -98,15 +99,17 @@
       "reasoningEffort": "max",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
     },
     "metis": {
-      "model": "openrouter/z-ai/glm-5.2",
+      "model": "ollama-cloud/glm-5.2",
       "fallback_models": [
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "openai/gpt-5.6-sol",
         "google/antigravity-gemini-3.1-pro",
         "opencode/nemotron-3-ultra-free"
@@ -117,8 +120,9 @@
       "reasoningEffort": "xhigh",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -126,8 +130,9 @@
       "model": "openai/gpt-5.6-sol",
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "anthropic/claude-sonnet-5",
+        "google/antigravity-claude-sonnet-4-6",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -136,7 +141,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "opencode/north-mini-code-free"
       ]
     }
@@ -147,7 +152,8 @@
       "fallback_models": [
         "openai/gpt-5.6-sol",
         "anthropic/claude-opus-4-8",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-opus-4-8",
+        "ollama-cloud/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -156,8 +162,9 @@
       "reasoningEffort": "xhigh",
       "fallback_models": [
         "google/antigravity-gemini-3.1-pro",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -167,7 +174,8 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-sonnet-4-6",
+        "ollama-cloud/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -175,8 +183,9 @@
       "model": "google/antigravity-gemini-3.1-pro",
       "fallback_models": [
         "openai/gpt-5.6-sol",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "anthropic/claude-opus-4-8",
+        "google/antigravity-claude-opus-4-8",
         "opencode/nemotron-3-ultra-free"
       ]
     },
@@ -185,7 +194,7 @@
       "fallback_models": [
         "google/antigravity-gemini-3-flash",
         "anthropic/claude-haiku-4-5",
-        "openrouter/z-ai/glm-5.2",
+        "ollama-cloud/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -195,7 +204,7 @@
         "google/antigravity-gemini-3-flash",
         "openai/gpt-5.6-luna",
         "anthropic/claude-haiku-4-5",
-        "openrouter/z-ai/glm-5.2"
+        "ollama-cloud/glm-5.2"
       ]
     },
     "unspecified-high": {
@@ -203,7 +212,8 @@
       "fallback_models": [
         "google/antigravity-gemini-3.5-flash",
         "anthropic/claude-sonnet-5",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-sonnet-4-6",
+        "ollama-cloud/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     },
@@ -212,7 +222,8 @@
       "fallback_models": [
         "openai/gpt-5.6-sol",
         "anthropic/claude-sonnet-5",
-        "openrouter/z-ai/glm-5.2",
+        "google/antigravity-claude-sonnet-4-6",
+        "ollama-cloud/glm-5.2",
         "opencode/deepseek-v4-flash-free"
       ]
     }
