@@ -10,9 +10,9 @@
     "agentmemory": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@agentmemory/mcp"
+        "sh",
+        "-lc",
+        "export PATH=\"$HOME/.asdf/shims:$HOME/.local/bin:$PATH\"; exec npx -y @agentmemory/mcp"
       ],
       "environment": {
         "ASDF_NODEJS_VERSION": "24.18.0"
@@ -22,9 +22,9 @@
     "playwright": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@playwright/mcp"
+        "sh",
+        "-lc",
+        "export PATH=\"$HOME/.asdf/shims:$HOME/.local/bin:$PATH\"; exec npx -y @playwright/mcp"
       ],
       "enabled": true
     },
