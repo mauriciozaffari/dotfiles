@@ -3,7 +3,8 @@
   "plugin": [
     "oh-my-openagent@latest",
     "opencode-claude-auth@latest",
-    "@expiren/opencode-antigravity-auth"
+    "@expiren/opencode-antigravity-auth",
+    "opencode-adaptive-thinking"
   ],
   "mcp": {
     "agentmemory": {
@@ -26,6 +27,16 @@
         "@playwright/mcp"
       ],
       "enabled": true
+    },
+    "home-assistant": {
+      "type": "local",
+      "enabled": false,
+      "timeout": 60000,
+      "command": [
+        "sh",
+        "-lc",
+        "set -a; [ -f \"$HOME/.config/opencode/mcp/ha.env\" ] && . \"$HOME/.config/opencode/mcp/ha.env\"; set +a; exec uvx ha-mcp@latest"
+      ]
     }
   },
   "provider": {
