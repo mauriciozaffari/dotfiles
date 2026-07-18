@@ -37,6 +37,11 @@
         "-lc",
         "export PATH=\"$HOME/.asdf/shims:$HOME/.local/bin:$PATH\"; set -a; [ -f \"$HOME/.config/opencode/mcp/ha.env\" ] && . \"$HOME/.config/opencode/mcp/ha.env\"; set +a; exec uvx ha-mcp@latest"
       ]
+    },
+    "sentry": {
+      "type": "remote",
+      "enabled": false,
+      "url": "https://mcp.sentry.dev/mcp"
     }
   },
   "provider": {
