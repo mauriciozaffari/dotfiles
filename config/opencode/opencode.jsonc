@@ -4,7 +4,7 @@
     "oh-my-openagent@latest",
     "opencode-claude-auth@latest",
     "@expiren/opencode-antigravity-auth",
-    "opencode-adaptive-thinking"
+    // "opencode-adaptive-thinking"
   ],
   "mcp": {
     "agentmemory": {
@@ -293,6 +293,152 @@
           "limit": {
             "context": 1048576,
             "output": 65535
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    },
+    "race-control": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Race Control",
+      "options": {
+        "baseURL": "http://192.168.1.253:8317/v1",
+        "apiKey": "{env:RACE_CONTROL_API_KEY}"
+      },
+      "models": {
+        "p1-max": {
+          "name": "Race Control P1 Max",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p1-high": {
+          "name": "Race Control P1 High",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p2-max": {
+          "name": "Race Control P2 Max",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p2-high": {
+          "name": "Race Control P2 High",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p3-xhigh": {
+          "name": "Race Control P3 XHigh",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gt3-medium": {
+          "name": "Race Control GT3 Medium",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gt4-medium": {
+          "name": "Race Control GT4 Medium",
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gt4-low": {
+          "name": "Race Control GT4 Low",
+          "limit": {
+            "context": 200000,
+            "output": 64000
           },
           "modalities": {
             "input": [
