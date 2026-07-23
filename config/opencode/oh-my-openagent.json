@@ -4,29 +4,11 @@
     "auto_init": true,
     "auto_provision": true,
     "enabled": true,
-    "telemetry": false
+    "telemetry": false,
+    "daemon": false
   },
   "notification": {
     "force_enable": true
-  },
-  "model_fallback": false,
-  "runtime_fallback": {
-    "enabled": false,
-    "retry_on_errors": [
-      408,
-      409,
-      429,
-      500,
-      502,
-      503,
-      504,
-      529
-    ],
-    "max_fallback_attempts": 6,
-    "cooldown_seconds": 300,
-    "timeout_seconds": 120,
-    "notify_on_fallback": true,
-    "restore_primary_after_cooldown": true
   },
   "tmux": {
     "enabled": true,
@@ -43,34 +25,42 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "race-control/p1"
+      "model": "race-control/p1",
+      "reasoningEffort": "high"
     },
     "hephaestus": {
-      "model": "race-control/p2"
+      "model": "race-control/p1:h",
+      "reasoningEffort": "medium"
     },
     "oracle": {
-      "model": "race-control/p3"
+      "model": "race-control/p1:h",
+      "reasoningEffort": "xhigh"
     },
     "explore": {
-      "model": "race-control/gt4"
+      "model": "race-control/p3",
+      "reasoningEffort": "low"
     },
     "multimodal-looker": {
       "model": "race-control/gt3"
     },
     "prometheus": {
-      "model": "race-control/gt3"
+      "model": "race-control/p1",
+      "reasoningEffort": "max"
     },
     "metis": {
-      "model": "race-control/gt4"
+      "model": "race-control/p2"
     },
     "momus": {
-      "model": "race-control/p3"
+      "model": "race-control/p2"
     },
     "atlas": {
       "model": "race-control/p2"
     },
+    "librarian": {
+      "model": "race-control/p3"
+    },
     "sisyphus-junior": {
-      "model": "race-control/gt4"
+      "model": "race-control/p2"
     }
   },
   "categories": {
@@ -78,25 +68,25 @@
       "model": "race-control/gt3"
     },
     "ultrabrain": {
-      "model": "race-control/p3"
+      "model": "race-control/p1:h"
     },
     "deep": {
-      "model": "race-control/p2"
+      "model": "race-control/p1:h"
     },
     "artistry": {
-      "model": "race-control/p2"
+      "model": "race-control/gt3"
     },
     "quick": {
-      "model": "race-control/gt4"
+      "model": "race-control/p3"
     },
     "unspecified-low": {
-      "model": "race-control/gt4"
+      "model": "race-control/p3"
     },
     "unspecified-high": {
       "model": "race-control/p2"
     },
     "writing": {
-      "model": "race-control/gt3"
+      "model": "race-control/p3"
     }
   }
 }

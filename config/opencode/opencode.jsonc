@@ -2,8 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
     "oh-my-openagent@latest",
-    "opencode-claude-auth@latest",
-    "@expiren/opencode-antigravity-auth",
     // "opencode-adaptive-thinking"
   ],
   "mcp": {
@@ -28,16 +26,6 @@
       ],
       "enabled": true
     },
-    "home-assistant": {
-      "type": "local",
-      "enabled": false,
-      "timeout": 60000,
-      "command": [
-        "sh",
-        "-lc",
-        "export PATH=\"$HOME/.asdf/shims:$HOME/.local/bin:$PATH\"; set -a; [ -f \"$HOME/.config/opencode/mcp/ha.env\" ] && . \"$HOME/.config/opencode/mcp/ha.env\"; set +a; exec uvx ha-mcp@latest"
-      ]
-    },
     "sentry": {
       "type": "remote",
       "enabled": false,
@@ -45,268 +33,6 @@
     }
   },
   "provider": {
-    "google": {
-      "npm": "@ai-sdk/google",
-      "models": {
-        "antigravity-gemini-3-pro": {
-          "name": "Gemini 3 Pro (Antigravity)",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "variants": {
-            "low": {
-              "thinkingLevel": "low"
-            },
-            "high": {
-              "thinkingLevel": "high"
-            }
-          }
-        },
-        "antigravity-gemini-3.1-pro": {
-          "name": "Gemini 3.1 Pro (Antigravity)",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "variants": {
-            "low": {
-              "thinkingLevel": "low"
-            },
-            "high": {
-              "thinkingLevel": "high"
-            }
-          }
-        },
-        "antigravity-gemini-3.5-flash": {
-          "name": "Gemini 3.5 Flash (Antigravity)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "variants": {
-            "low": {
-              "thinkingLevel": "low"
-            },
-            "medium": {
-              "thinkingLevel": "medium"
-            },
-            "high": {
-              "thinkingLevel": "high"
-            }
-          }
-        },
-        "antigravity-gemini-3-flash": {
-          "name": "Gemini 3 Flash (Antigravity)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "variants": {
-            "minimal": {
-              "thinkingLevel": "minimal"
-            },
-            "low": {
-              "thinkingLevel": "low"
-            },
-            "medium": {
-              "thinkingLevel": "medium"
-            },
-            "high": {
-              "thinkingLevel": "high"
-            }
-          }
-        },
-        "antigravity-claude-sonnet-4-6": {
-          "name": "Claude Sonnet 4.6 (Antigravity)",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "antigravity-claude-opus-4-6-thinking": {
-          "name": "Claude Opus 4.6 Thinking (Antigravity)",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "variants": {
-            "low": {
-              "thinkingConfig": {
-                "thinkingBudget": 8192
-              }
-            },
-            "max": {
-              "thinkingConfig": {
-                "thinkingBudget": 32768
-              }
-            }
-          }
-        },
-        "gemini-2.5-flash": {
-          "name": "Gemini 2.5 Flash (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemini-2.5-pro": {
-          "name": "Gemini 2.5 Pro (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemini-3-flash-preview": {
-          "name": "Gemini 3 Flash Preview (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemini-3-pro-preview": {
-          "name": "Gemini 3 Pro Preview (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemini-3.1-pro-preview": {
-          "name": "Gemini 3.1 Pro Preview (Gemini CLI)",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemini-3.1-pro-preview-customtools": {
-          "name": "gemini-3.1-pro-preview-customtools",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        }
-      }
-    },
     "race-control": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Race Control",
@@ -315,17 +41,31 @@
       },
       "models": {
         "p1": {
-          "name": "Race Control P1",
+          "name": "P1",
           "limit": {
-            "context": 200000,
-            "output": 64000
+            "context": 1048576,
+            "output": 65536
           },
-          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
           "modalities": {
             "input": [
-              "text",
-              "image",
-              "pdf"
+              "text"
             ],
             "output": [
               "text"
@@ -333,17 +73,31 @@
           }
         },
         "p2": {
-          "name": "Race Control P2",
+          "name": "P2",
           "limit": {
-            "context": 200000,
-            "output": 64000
+            "context": 1048576,
+            "output": 65536
           },
-          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
           "modalities": {
             "input": [
-              "text",
-              "image",
-              "pdf"
+              "text"
             ],
             "output": [
               "text"
@@ -351,17 +105,31 @@
           }
         },
         "p3": {
-          "name": "Race Control P3",
+          "name": "P3",
           "limit": {
-            "context": 200000,
-            "output": 64000
+            "context": 1048576,
+            "output": 65536
           },
-          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
           "modalities": {
             "input": [
-              "text",
-              "image",
-              "pdf"
+              "text"
             ],
             "output": [
               "text"
@@ -369,12 +137,28 @@
           }
         },
         "gt3": {
-          "name": "Race Control GT3",
+          "name": "GT3",
           "limit": {
             "context": 200000,
             "output": 64000
           },
-          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
           "modalities": {
             "input": [
               "text",
@@ -387,17 +171,97 @@
           }
         },
         "gt4": {
-          "name": "Race Control GT4",
+          "name": "GT4",
           "limit": {
             "context": 200000,
             "output": 64000
           },
-          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
           "modalities": {
             "input": [
               "text",
               "image",
               "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p1:h": {
+          "name": "P1 Hybrid",
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "p1:l": {
+          "name": "P1 Light",
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "variants": {
+            "low": {
+              "reasoning_effort": "low"
+            },
+            "medium": {
+              "reasoning_effort": "medium"
+            },
+            "high": {
+              "reasoning_effort": "high"
+            },
+            "xhigh": {
+              "reasoning_effort": "xhigh"
+            },
+            "max": {
+              "reasoning_effort": "max"
+            }
+          },
+          "modalities": {
+            "input": [
+              "text"
             ],
             "output": [
               "text"
