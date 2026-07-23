@@ -311,12 +311,11 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Race Control",
       "options": {
-        "baseURL": "http://192.168.1.253:8317/v1",
-        "apiKey": "{auth:race-control}"
+        "baseURL": "http://192.168.1.253:8317/v1"
       },
       "models": {
-        "p1-max": {
-          "name": "Race Control P1 Max",
+        "p1": {
+          "name": "Race Control P1",
           "limit": {
             "context": 200000,
             "output": 64000
@@ -332,8 +331,8 @@
             ]
           }
         },
-        "p1-high": {
-          "name": "Race Control P1 High",
+        "p2": {
+          "name": "Race Control P2",
           "limit": {
             "context": 200000,
             "output": 64000
@@ -349,8 +348,8 @@
             ]
           }
         },
-        "p2-max": {
-          "name": "Race Control P2 Max",
+        "p3": {
+          "name": "Race Control P3",
           "limit": {
             "context": 200000,
             "output": 64000
@@ -366,8 +365,8 @@
             ]
           }
         },
-        "p2-high": {
-          "name": "Race Control P2 High",
+        "gt3": {
+          "name": "Race Control GT3",
           "limit": {
             "context": 200000,
             "output": 64000
@@ -383,59 +382,8 @@
             ]
           }
         },
-        "p3-xhigh": {
-          "name": "Race Control P3 XHigh",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gt3-medium": {
-          "name": "Race Control GT3 Medium",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gt4-medium": {
-          "name": "Race Control GT4 Medium",
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gt4-low": {
-          "name": "Race Control GT4 Low",
+        "gt4": {
+          "name": "Race Control GT4",
           "limit": {
             "context": 200000,
             "output": 64000
