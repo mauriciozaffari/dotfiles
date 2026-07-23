@@ -320,6 +320,7 @@
             "context": 200000,
             "output": 64000
           },
+          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
           "modalities": {
             "input": [
               "text",
@@ -337,6 +338,7 @@
             "context": 200000,
             "output": 64000
           },
+          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
           "modalities": {
             "input": [
               "text",
@@ -354,6 +356,7 @@
             "context": 200000,
             "output": 64000
           },
+          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
           "modalities": {
             "input": [
               "text",
@@ -371,6 +374,7 @@
             "context": 200000,
             "output": 64000
           },
+          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
           "modalities": {
             "input": [
               "text",
@@ -388,6 +392,7 @@
             "context": 200000,
             "output": 64000
           },
+          "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
           "modalities": {
             "input": [
               "text",
