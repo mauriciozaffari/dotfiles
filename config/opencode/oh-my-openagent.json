@@ -43,60 +43,60 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "race-control/p1"
+      "model": "race-control/p1-high"
     },
     "hephaestus": {
-      "model": "race-control/p2"
+      "model": "race-control/p2-max"
     },
     "oracle": {
-      "model": "race-control/p3"
+      "model": "race-control/p3-xhigh"
     },
     "explore": {
-      "model": "race-control/gt4"
+      "model": "race-control/gt4-low"
     },
     "multimodal-looker": {
-      "model": "race-control/gt3"
+      "model": "race-control/gt3-medium"
     },
     "prometheus": {
-      "model": "race-control/gt3"
+      "model": "race-control/gt3-medium"
     },
     "metis": {
-      "model": "race-control/gt4"
+      "model": "race-control/gt4-low"
     },
     "momus": {
-      "model": "race-control/p3"
+      "model": "race-control/p3-xhigh"
     },
     "atlas": {
-      "model": "race-control/p2"
+      "model": "race-control/p2-max"
     },
     "sisyphus-junior": {
-      "model": "race-control/gt4"
+      "model": "race-control/gt4-low"
     }
   },
   "categories": {
     "visual-engineering": {
-      "model": "race-control/gt3"
+      "model": "race-control/gt3-medium"
     },
     "ultrabrain": {
-      "model": "race-control/p3"
+      "model": "race-control/p3-xhigh"
     },
     "deep": {
-      "model": "race-control/p2"
+      "model": "race-control/p2-max"
     },
     "artistry": {
-      "model": "race-control/p2"
+      "model": "race-control/p2-max"
     },
     "quick": {
-      "model": "race-control/gt4"
+      "model": "race-control/gt4-low"
     },
     "unspecified-low": {
-      "model": "race-control/gt4"
+      "model": "race-control/gt4-low"
     },
     "unspecified-high": {
-      "model": "race-control/p2"
+      "model": "race-control/p2-max"
     },
     "writing": {
-      "model": "race-control/gt3"
+      "model": "race-control/gt3-medium"
     }
   }
 }
