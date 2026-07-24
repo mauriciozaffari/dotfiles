@@ -1,4 +1,29 @@
 IdentityFile ~/.ssh/id_ed25519
 
-Host server
+Host le-mans
+  User mauricio
   HostName 192.168.1.253
+
+Host interlagos
+  User root
+  HostName 192.168.1.252
+
+Host develoz.interlagos
+  User root
+  HostName 192.168.1.241
+
+Host inscripto.interlagos
+  User root
+  HostName 192.168.1.242
+
+Host looper.interlagos
+  User root
+  HostName 192.168.1.243
+
+Host pitwall.interlagos
+  User root
+  HostName 192.168.1.244
+
+Host ams2.interlagos
+  User Mauricio
+  HostName 192.168.1.163
