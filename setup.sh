@@ -289,6 +289,19 @@ else
     warn "No .tool-versions found, skipping asdf installs"
 fi
 
+# --------------------------------------------------
+# 13. OpenCode plugins
+# --------------------------------------------------
+if command -v bun &>/dev/null; then
+    info "Installing OpenCode auto-update plugin..."
+    bun add -g opencode-plugin-auto-update || npm install -g opencode-plugin-auto-update
+    ok "opencode-plugin-auto-update installed"
+elif command -v npm &>/dev/null; then
+    info "Installing OpenCode auto-update plugin..."
+    npm install -g opencode-plugin-auto-update
+    ok "opencode-plugin-auto-update installed"
+fi
+
 echo ""
 echo "============================================"
 ok "Setup complete!"
