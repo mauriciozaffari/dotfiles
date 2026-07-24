@@ -4,6 +4,7 @@ Walk this list for **each** changed file. Only emit findings with a concrete anc
 
 ## Table of contents
 
+- [Goal alignment](#goal-alignment)
 - [Correctness](#correctness)
 - [Consistency and DRY](#consistency-and-dry)
 - [Implementation shape: DRY / KISS / SOLID](#implementation-shape-dry--kiss--solid)
@@ -14,6 +15,15 @@ Walk this list for **each** changed file. Only emit findings with a concrete anc
 - [Tests](#tests)
 - [Submodules](#submodules)
 - [Classification guide](#classification-guide)
+
+## Goal alignment
+
+- The PR delivers the core outcome its ticket / description set out to produce.
+- Judge the *goal*, not a literal ticket checklist — a change can succeed without implementing every over-specified or stale ticket bullet.
+- The implementation solves the problem that was asked, not an adjacent or different one.
+- Anything the ticket treated as essential is present, or its absence is justified (descoped / follow-up).
+- No substantial scope drift — unrelated changes belong in their own PR.
+- Ticket reference resolved from the branch and title first; body references may point at *related* tickets, not this PR's goal.
 
 ## Correctness
 

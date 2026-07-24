@@ -16,10 +16,10 @@ Produce rigorous, actionable code review feedback on a GitHub pull request. No p
 
 1. **Identify viewer and PR author** — determine ownership.
 2. **Resolve the target repo** — main repo, submodule repo, or unrelated (abort).
-3. **Fetch PR metadata, diff, and existing review threads**.
+3. **Fetch PR metadata, diff, existing review threads, and the linked ticket**.
 4. **Check out the PR branch locally** in the correct working directory (main repo root or submodule path).
 5. **Understand the surrounding codebase** — patterns, conventions, related files.
-6. **Analyze every changed file** against the checklist.
+6. **Analyze every changed file** — correctness, shape, and whether the PR achieves its goal.
 7. **Produce findings** as anchored change requests.
 8. **Deliver** per ownership mode (self vs. collaborator).
 
@@ -113,6 +113,18 @@ options:
 
 Only perform the selected action after the user chooses it. If `Question` is unavailable, stop; do not modify existing feedback.
 
+### Resolve the linked ticket (the PR's goal source)
+
+The PR body is rarely the whole story — the real acceptance criteria usually live in a linked ticket or issue. Detect a reference and fetch it so you review against intent, not just diff correctness.
+
+- Look for a ticket / issue reference in the **branch name**, **PR title**, and **PR body**. Formats vary by tracker (e.g. `ABC-123` Jira/Linear keys, `#123` or `owner/repo#123` GitHub issues, or full issue URLs).
+- Trust the branch name and PR title first. Be careful with the PR body: it often links *related* tickets ("depends on", "follow-up to", "see also") rather than the one this PR delivers. Only treat a body reference as the PR's own goal when it clearly identifies what this PR delivers and the branch/title carry no key.
+- Authors sometimes forget the reference in one or more places, so check all three — it may appear in only one.
+- Fetch it via whatever integration is available: the tracker's MCP tool (Jira/Linear), `gh issue view <n>` for GitHub issues, or a `WebFetch` of the issue URL. If nothing can reach it, note that and fall back to the PR description.
+- If no reference exists anywhere, do not invent one — treat the PR title + description as the stated goal.
+
+Extract the intent — summary, acceptance criteria, scope, and any explicit out-of-scope notes — and hold it as the yardstick for the goal-alignment pass in Step 6.
+
 ## Step 4: Check Out the PR Locally
 
 Run the checkout in the **review root** resolved in Step 2 — main repo root for main-repo PRs, the submodule path for submodule PRs. Always pass `-R <owner/repo>` to `gh` so it targets the PR's repo, not the parent's.
@@ -143,6 +155,17 @@ For each changed file or module, before critiquing:
 - Read linter/formatter/test configs (`.rubocop.yml`, `eslint.config.*`, `pyproject.toml`, etc.) so feedback aligns with project standards.
 - For submodule changes, inspect the referenced commit in the submodule repo.
 
+### Delegate to specialized agents
+
+If the host provides consultant subagents, use them via the `Task` tool instead of doing everything inline. Match the role to whatever agents are available, and skip gracefully if none are:
+
+- **Codebase / reference context** — an exploration agent (e.g. `explore`, `librarian`) for patterns, call sites, and library docs.
+- **Goal & gap analysis** — a pre-analysis agent (e.g. `metis`) to surface the ticket's true intent, ambiguities, and whether the PR achieves its goal. Drives the goal-alignment pass.
+- **Rigorous critique** — a reviewer/critic agent (e.g. `momus`) for a skeptical pass over correctness, completeness, and edge cases.
+- **Hard findings / design** — a high-IQ reasoning agent (e.g. `oracle`) for a second opinion on a difficult finding or a non-trivial design decision.
+
+Summarize each agent's findings yourself before acting — the user cannot see subagent output.
+
 ### Related skills
 
 - If the project ships a code-style or conventions skill for its language/framework, load it so your feedback matches the house style.
@@ -151,7 +174,17 @@ Do not critique style that the project's configured linters already enforce or i
 
 ## Step 6: Analyze Every Changed File
 
-For **each** changed file, walk the checklist in [references/review-checklist.md](references/review-checklist.md). Review on **two passes** — do both before producing findings:
+For **each** changed file, walk the checklist in [references/review-checklist.md](references/review-checklist.md). Review in **three passes** — do all three before producing findings:
+
+**Pass 0 — Goal alignment (does the PR achieve its purpose?):**
+
+Judge the PR against its *goal*, not a literal checklist of the ticket. Where a pre-analysis agent is available, delegate this (ticket + diff) and confirm its verdict yourself:
+
+- Does the diff actually deliver the core outcome the ticket / PR set out to produce? Name that outcome and confirm the code produces it.
+- A PR can achieve the goal without implementing every line the ticket mentions — tickets are often over-specified, negotiable, or partly stale. Do not flag "missing X" as `required` when X was not essential to the outcome or was reasonably descoped.
+- Flag as `required` when the core goal is *not* met, is only partially met, or the implementation solves a different problem than the one asked — even if the code is otherwise clean.
+- Note scope drift: substantial changes unrelated to the goal (usually `good_to_have`, or `required` if they add risk).
+- If no ticket could be resolved, assess against the PR title/description and say so.
 
 **Pass 1 — Correctness and conventions:**
 
