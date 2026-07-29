@@ -347,6 +347,11 @@ for plugin in "$DOTFILES/config/opencode/plugin/"*.ts; do
     link_file "$plugin" "$HOME/.config/opencode/plugin/$(basename "$plugin")"
 done
 
+for plugin in "$DOTFILES/config/opencode/plugins/"*.js; do
+    [ -e "$plugin" ] || continue
+    link_file "$plugin" "$HOME/.config/opencode/race-control/$(basename "$plugin")"
+done
+
 for agent in "$DOTFILES/config/opencode/agent/"*.md; do
     [ -e "$agent" ] || continue
     link_file "$agent" "$HOME/.config/opencode/agent/$(basename "$agent")"

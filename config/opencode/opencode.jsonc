@@ -3,7 +3,8 @@
   "plugin": [
     "opencode-plugin-auto-update",
     "oh-my-openagent",
-    "opencode-adaptive-thinking"
+    "opencode-adaptive-thinking",
+    ["{env:HOME}/.config/opencode/race-control/race-control.js", {}]
   ],
   "mcp": {
     "agentmemory": {
