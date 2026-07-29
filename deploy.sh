@@ -342,8 +342,10 @@ info "OpenCode configuration"
 link_file "$DOTFILES/config/opencode/AGENTS.md"      "$HOME/.config/opencode/AGENTS.md"
 link_file "$DOTFILES/config/opencode/opencode.jsonc"  "$HOME/.config/opencode/opencode.jsonc"
 link_file "$DOTFILES/config/opencode/oh-my-openagent.json" "$HOME/.config/opencode/oh-my-openagent.json"
-link_file "$DOTFILES/config/opencode/plugin/block-hardcoded-secrets.ts" \
-          "$HOME/.config/opencode/plugin/block-hardcoded-secrets.ts"
+for plugin in "$DOTFILES/config/opencode/plugin/"*.ts; do
+    [ -e "$plugin" ] || continue
+    link_file "$plugin" "$HOME/.config/opencode/plugin/$(basename "$plugin")"
+done
 
 for agent in "$DOTFILES/config/opencode/agent/"*.md; do
     [ -e "$agent" ] || continue
