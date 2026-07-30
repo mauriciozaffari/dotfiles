@@ -20,6 +20,18 @@ After making changes to files in this repo:
 
 This creates symlinks from your home directory to the repo files. Any existing files that would be overwritten are backed up to `~/.dotfiles/backups/<timestamp>/` with a manifest for rollback.
 
+### Automatic Deployment
+
+A `post-merge` Git hook runs `deploy.sh --non-interactive` automatically after every `git pull` in the dotfiles repo, so symlinks and configs stay in sync without a manual deploy step. The hook only fires inside the dotfiles repository — it is a no-op when symlinked into other projects.
+
+For headless or scripted use:
+
+```bash
+~/dotfiles/deploy.sh --non-interactive
+```
+
+Non-interactive mode relinks all configs and updates hooks for already-installed projects, but skips the interactive prompt for newly discovered projects under `~/development`.
+
 ## Rollback
 
 To undo a deployment and restore previous files:
