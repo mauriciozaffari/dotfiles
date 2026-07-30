@@ -6,15 +6,6 @@
     "opencode-adaptive-thinking",
     ["{env:HOME}/.config/opencode/race-control/race-control.js", {}]
   ],
-  "provider": {
-    "race-control": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Race Control",
-      "options": {
-        "baseURL": "http://192.168.1.253:8317/v1"
-      }
-    }
-  },
   "mcp": {
     "agentmemory": {
       "type": "local",
