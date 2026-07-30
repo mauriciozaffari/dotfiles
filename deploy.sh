@@ -216,7 +216,9 @@ deploy_hooks() {
         ok "Updated hooks in $updated installed project(s)"
     fi
 
-    # 2. Discover new projects in ~/development
+    install_hooks_to_project "$DOTFILES"
+
+    # Discover new projects in ~/development
     local dev_dir="$HOME/development"
     if [ ! -d "$dev_dir" ]; then
         return
@@ -236,6 +238,11 @@ deploy_hooks() {
     done < <(find "$dev_dir" -name ".git" -maxdepth 3 2>/dev/null | sort)
 
     if [ ${#new_projects[@]} -eq 0 ]; then
+        return
+    fi
+
+    if [ "$NON_INTERACTIVE" = true ]; then
+        info "Skipping hooks for ${#new_projects[@]} unconfigured project(s) in non-interactive mode"
         return
     fi
 
@@ -295,7 +302,25 @@ deploy_hooks() {
 # ──────────────────────────────────────────────────
 # Entry point
 # ──────────────────────────────────────────────────
-if [ "${1:-}" = "--rollback" ]; then
+NON_INTERACTIVE=false
+ROLLBACK=false
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --non-interactive|-n)
+            NON_INTERACTIVE=true
+            ;;
+        --rollback)
+            ROLLBACK=true
+            ;;
+    esac
+    shift
+done
+
+if [ ! -t 0 ]; then
+    NON_INTERACTIVE=true
+fi
+
+if [ "$ROLLBACK" = true ]; then
     do_rollback
 fi
 
