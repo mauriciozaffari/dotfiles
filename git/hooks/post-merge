@@ -4,7 +4,7 @@ HOOK_REAL="$(readlink -f "$0")"
 REPO_ROOT="$(dirname "$(dirname "$HOOK_REAL")")"
 
 # Only act when invoked from the dotfiles repository
-if [ "$(GIT_MASTER=1 git -C "$REPO_ROOT" remote get-url origin 2>/dev/null)" != "git@github.com:mauriciozaffari/dotfiles.git" ]; then
+if ! GIT_MASTER=1 git -C "$REPO_ROOT" remote get-url origin 2>/dev/null | grep -q 'mauriciozaffari/dotfiles'; then
     exit 0
 fi
 
