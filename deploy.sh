@@ -123,6 +123,68 @@ save_manifest() {
     fi
 }
 
+restore_vscodium_view_state() {
+    local state_file="$DOTFILES/config/vscodium/view-state.json"
+    local database="$HOME/.config/VSCodium/User/globalStorage/state.vscdb"
+
+    [ -f "$state_file" ] || return
+
+    if pgrep -f '^/usr/share/codium/codium$' >/dev/null 2>&1; then
+        warn "VSCodium is running; skipping view-state restore. Close it and run deploy.sh again."
+        return
+    fi
+
+    mkdir -p "$(dirname "$database")"
+    python3 - "$state_file" "$database" <<'PY'
+import json
+import sqlite3
+import sys
+
+state_path, database_path = sys.argv[1:]
+with open(state_path, encoding="utf-8") as state_file:
+    state = json.load(state_file)
+
+if state.get("version") != 1 or not isinstance(state.get("entries"), dict):
+    raise SystemExit(f"Unsupported VSCodium view-state format: {state_path}")
+
+database = sqlite3.connect(database_path)
+with database:
+    database.execute(
+        "CREATE TABLE IF NOT EXISTS ItemTable "
+        "(key TEXT UNIQUE ON CONFLICT REPLACE, value BLOB)"
+    )
+    database.executemany(
+        "INSERT INTO ItemTable(key, value) VALUES (?, ?) "
+        "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+        state["entries"].items(),
+    )
+database.close()
+PY
+    ok "VSCodium view organization restored"
+}
+
+install_vscodium_extensions() {
+    local extensions_file="$DOTFILES/config/vscodium/extensions.txt"
+
+    [ -f "$extensions_file" ] || return
+    if ! command -v codium >/dev/null 2>&1; then
+        warn "VSCodium is not installed; skipping extensions"
+        return
+    fi
+
+    local installed
+    installed="$(codium --list-extensions)"
+    while IFS= read -r extension; do
+        [ -n "$extension" ] || continue
+        if printf '%s\n' "$installed" | grep -qFx "$extension"; then
+            continue
+        fi
+        info "Installing VSCodium extension: $extension"
+        codium --install-extension "$extension"
+    done < "$extensions_file"
+    ok "VSCodium extensions installed"
+}
+
 # ──────────────────────────────────────────────────
 # Git hooks helpers
 # ──────────────────────────────────────────────────
@@ -388,6 +450,17 @@ for skill_dir in "$DOTFILES/config/opencode/skills/"*/; do
     local_name="$(basename "$skill_dir")"
     link_file "$skill_dir" "$HOME/.config/opencode/skills/$local_name"
 done
+echo ""
+
+# VSCodium
+info "VSCodium configuration"
+link_file "$DOTFILES/config/vscodium/product.json" "$HOME/.config/VSCodium/product.json"
+link_file "$DOTFILES/config/vscodium/User/settings.json" "$HOME/.config/VSCodium/User/settings.json"
+link_file "$DOTFILES/config/vscodium/User/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"
+link_file "$DOTFILES/config/vscodium/User/globalStorage/alefragnani.project-manager/projects.json" \
+    "$HOME/.config/VSCodium/User/globalStorage/alefragnani.project-manager/projects.json"
+restore_vscodium_view_state
+install_vscodium_extensions
 echo ""
 
 # AGENTS.md
