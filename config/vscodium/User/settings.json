@@ -1,0 +1,1031 @@
+{
+    "files.associations": {
+        ".env*": "dotenv"
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/public/system/*/**": true
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "keyword.other.dotenv",
+                "settings": {
+                    "foreground": "#FF000000"
+                }
+            }
+        ]
+    },
+    "workbench.sideBar.location": "right",
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "workbench.activityBar.location": "top",
+    "editor.minimap.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "containers.containers.label": "ContainerName",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "window.commandCenter": false,
+    "workbench.editor.wrapTabs": true,
+    "editor.wordWrapColumn": 120,
+    "chat.tools.terminal.autoApprove": {
+        "yarn test": true,
+        "bin/run": true
+    },
+    "git.enableSmartCommit": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "git.confirmSync": false,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "terminal.integrated.env.linux": {
+        "EDITOR": "codium --wait"
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh",
+            "icon": "terminal-compact"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux",
+            "args": [
+                "new",
+                "-A",
+                "-s",
+                "${workspaceFolderBasename}"
+            ]
+        },
+        "tmux-new": {
+            "path": "tmux",
+            "args": [
+                "new",
+                "-A",
+                "-s",
+                "${workspaceFolderBasename};",
+                "new-window"
+            ]
+        },
+        "Claude": {
+            "path": "claude",
+            "icon": "claude",
+            "color": "terminal.ansiYellow",
+            "overrideName": true
+        },
+        "Codex": {
+            "path": "codex",
+            "icon": "openai",
+            "color": "terminal.ansiBlack",
+            "overrideName": true
+        },
+        "opencode": {
+            "path": "tmux",
+            "args": [
+                "new",
+                "-A",
+                "-s",
+                "${workspaceFolderBasename}-oc",
+                "opencode"
+            ],
+            "icon": "robot",
+            "color": "terminal.ansiWhite",
+            "overrideName": true
+        }
+    },
+    "terminal.integrated.stickyScroll.ignoredCommands": [
+        "clear",
+        "cls",
+        "clear-host",
+        "agent",
+        "agy",
+        "copilot",
+        "claude",
+        "codex",
+        "gemini",
+        "opencode"
+    ],
+    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "terminal.integrated.tabs.location": "left",
+    "terminal.integrated.scrollback": 5000,
+    "editor.formatOnSave": true,
+    "editor.stickyScroll.maxLineCount": 8,
+    "editor.rulers": [
+        120
+    ],
+    "rubyLsp.enabledFeatures": {
+        "codeActions": true,
+        "diagnostics": true,
+        "documentHighlights": true,
+        "documentLink": true,
+        "documentSymbols": true,
+        "foldingRanges": true,
+        "formatting": true,
+        "hover": true,
+        "inlayHint": true,
+        "onTypeFormatting": true,
+        "selectionRanges": true,
+        "semanticHighlighting": true,
+        "completion": true,
+        "codeLens": true,
+        "definition": true,
+        "workspaceSymbol": true,
+        "signatureHelp": true,
+        "typeHierarchy": true
+    },
+    "rubyLsp.featureFlags": {
+        "fullTestDiscovery": true
+    },
+    "githubPullRequests.queries": [
+        {
+            "label": "Local Pull Request Branches",
+            "query": "default"
+        },
+        {
+            "label": "Waiting For My Review",
+            "query": "repo:${owner}/${repository} is:open draft:false"
+        },
+        {
+            "label": "Drafts",
+            "query": "repo:${owner}/${repository} is:open draft:true"
+        },
+        {
+            "label": "Created By Me",
+            "query": "repo:${owner}/${repository} is:open author:${user}"
+        },
+        {
+            "label": "All Open",
+            "query": "default"
+        }
+    ],
+    "editor.tabSize": 2,
+    "editor.fontFamily": "'MesloLGS NF'",
+    "files.trimFinalNewlines": true,
+    "editor.trimWhitespaceOnDelete": true,
+    "redhat.telemetry.enabled": false,
+    "[jsonc]": {
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "[ruby]": {
+        "editor.defaultColorDecorators": "never",
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.semanticHighlighting.enabled": true,
+        "editor.formatOnType": true,
+        "editor.wordSeparators": "`~@#$%^&*()-=+[{]}\\|;:'\",.<>/"
+    },
+    "githubPullRequests.terminalLinksHandler": "github",
+    "window.menuBarVisibility": "compact",
+    "yaml.schemas": {
+        "file:///home/mauricio/.vscode/extensions/continue.continue-1.2.24-linux-x64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///home/mauricio/.vscode-server/extensions/docsmsft.docs-yaml-1.0.6/dist/toc.schema.json": "/toc\\.yml/i"
+    },
+    "markiscodecoverage.searchCriteria": "**/coverage/lcov*.info",
+    "[erb]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp"
+    },
+    "git.openRepositoryInParentFolders": "never",
+    "githubPullRequests.pullBranch": "never",
+    "json.schemaDownload.trustedDomains": {
+        "https://biomejs.dev": true,
+        "https://developer.microsoft.com/json-schemas/": true,
+        "https://json-schema.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://models.dev": true,
+        "https://opencode.ai": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://raw.githubusercontent.com/devcontainers/spec/": true,
+        "https://raw.githubusercontent.com/microsoft/vscode/": true,
+        "https://schemastore.azurewebsites.net/": true,
+        "https://www.schemastore.org/": true
+    },
+    "workbench.colorTheme": "Dark Modern",
+    "github-actions.workflows.pinned.refresh.enabled": true,
+    "githubPullRequests.notifications": "pullRequests",
+    "yaml.format.printWidth": 120,
+    "yaml.format.proseWrap": "never",
+    "yaml.format.singleQuote": true,
+    "git.detectWorktrees": true,
+    "git.worktreeIncludeFiles": [
+        ".env"
+    ],
+    "obsidian-md-vsc.defaultVault": "Inscripto",
+    "obsidian-md-vsc.defaultVaultPath": "/home/mauricio/Documents/obsidian/Inscripto",
+    "obsidian-md-vsc.defaultNote": "Notes",
+    "security.promptForLocalFileProtocolHandling": false,
+    "[haml]": {
+        "editor.defaultFormatter": "karunamurti.haml"
+    },
+    "workbench.startupEditor": "none",
+    "workbench.browser.dataStorage": "workspace",
+    "chat.disableAIFeatures": true,
+    "terminal.integrated.initialHint": false,
+    "linter.linters": {
+        "brakeman": {
+            "capabilities": [],
+            "command": [
+                [
+                    "$isBundler",
+                    "bundle",
+                    "exec"
+                ],
+                "brakeman",
+                "--format",
+                "json",
+                "--no-progress",
+                "--quiet",
+                "--absolute-paths",
+                [
+                    "$config",
+                    "--config-file",
+                    "$config"
+                ],
+                "$rootDir"
+            ],
+            "configFiles": [
+                "brakeman.yml",
+                "config/brakeman.yml",
+                ".brakeman/config.yml"
+            ],
+            "enabled": false,
+            "languages": [
+                "ruby",
+                "ruby-puma",
+                "ruby-bundler",
+                "ruby-test",
+                "erb"
+            ],
+            "name": "brakeman",
+            "url": "https://brakemanscanner.org/",
+            "when": [
+                "$isRails"
+            ]
+        },
+        "cargo-clippy": {
+            "capabilities": [
+                "fix-inline",
+                "ignore-file"
+            ],
+            "command": [
+                "cargo-clippy",
+                "$file",
+                "--no-deps",
+                "--message-format",
+                "json",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ]
+            ],
+            "configFiles": [
+                "clippy.toml",
+                ".clippy.toml"
+            ],
+            "enabled": true,
+            "languages": [
+                "rust"
+            ],
+            "name": "cargo-clippy",
+            "url": "https://doc.rust-lang.org/clippy/"
+        },
+        "credo": {
+            "capabilities": [
+                "ignore-line",
+                "ignore-file"
+            ],
+            "command": [
+                "mix",
+                "credo",
+                "--format",
+                "json",
+                "--read-from-stdin",
+                "--all-priorities",
+                "$file"
+            ],
+            "configFiles": [],
+            "enabled": true,
+            "languages": [
+                "elixir"
+            ],
+            "name": "credo",
+            "url": "https://hexdocs.pm/credo/"
+        },
+        "dart": {
+            "capabilities": [],
+            "command": [
+                "dart",
+                "analyze",
+                "$file"
+            ],
+            "configFiles": [],
+            "enabled": true,
+            "languages": [
+                "dart"
+            ],
+            "name": "dart",
+            "url": "https://dart.dev/tools/linter-rules"
+        },
+        "erb_lint": {
+            "capabilities": [],
+            "command": [
+                [
+                    "$isBundler",
+                    "bundle",
+                    "exec"
+                ],
+                "erblint",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--format",
+                "json",
+                "$file"
+            ],
+            "configFiles": [
+                ".erb-lint.yml"
+            ],
+            "enabled": true,
+            "languages": [
+                "erb"
+            ],
+            "name": "erb_lint",
+            "url": "https://github.com/Shopify/erb-lint"
+        },
+        "eslint": {
+            "capabilities": [
+                "ignore-line",
+                "ignore-file",
+                "fix-one",
+                "fix-all",
+                "fix-inline"
+            ],
+            "command": [
+                "eslint",
+                "--format",
+                "json",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                [
+                    "$debug",
+                    "--loglevel",
+                    "debug",
+                    "--debug"
+                ],
+                [
+                    "$fixAll",
+                    "--fix-dry-run"
+                ],
+                [
+                    "$fixOne",
+                    "--fix-dry-run"
+                ],
+                "--stdin-filename",
+                "$file",
+                "--stdin"
+            ],
+            "configFiles": [
+                ".eslintrc.js",
+                ".eslintrc.cjs",
+                ".eslintrc.yaml",
+                ".eslintrc.yml",
+                ".eslintrc.json",
+                ".eslintrc"
+            ],
+            "enabled": false,
+            "languages": [
+                "javascript",
+                "jsx",
+                "typescript",
+                "typescriptreact"
+            ],
+            "name": "eslint",
+            "url": "https://eslint.org"
+        },
+        "gherkin-lint": {
+            "capabilities": [],
+            "command": [
+                "gherkin-lint",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--format",
+                "json",
+                "$file"
+            ],
+            "configFiles": [
+                ".gherkin-lintrc"
+            ],
+            "enabled": true,
+            "languages": [
+                "cucumber"
+            ],
+            "name": "gherkin-lint",
+            "url": "https://github.com/vsiakka/gherkin-lint"
+        },
+        "hadolint": {
+            "capabilities": [
+                "ignore-line"
+            ],
+            "command": [
+                "hadolint",
+                "--format",
+                "json",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "-"
+            ],
+            "configFiles": [
+                ".hadolint.yml",
+                ".hadolint.yaml"
+            ],
+            "enabled": true,
+            "languages": [
+                "dockerfile"
+            ],
+            "name": "hadolint",
+            "url": "https://github.com/hadolint/hadolint"
+        },
+        "language-tool": {
+            "capabilities": [],
+            "command": [
+                "languagetool",
+                "--json",
+                "--autoDetect"
+            ],
+            "configFiles": [],
+            "enabled": true,
+            "languages": [
+                "markdown",
+                "html",
+                "plaintext"
+            ],
+            "name": "language-tool",
+            "url": "https://github.com/languagetool-org/languagetool"
+        },
+        "luacheck": {
+            "capabilities": [],
+            "command": [
+                "luacheck",
+                "--formatter",
+                "plain",
+                "--codes",
+                "--ranges",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "-"
+            ],
+            "configFiles": [
+                ".luacheckrc"
+            ],
+            "enabled": true,
+            "languages": [
+                "lua"
+            ],
+            "name": "luacheck",
+            "url": "https://luacheck.readthedocs.io/en/stable/"
+        },
+        "markdownlint": {
+            "capabilities": [
+                "fix-inline"
+            ],
+            "command": [
+                "markdownlint",
+                "--json",
+                [
+                    "$fixAll",
+                    "--fix"
+                ],
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--stdin"
+            ],
+            "configFiles": [
+                ".markdownlint.json",
+                ".markdownlint.yaml",
+                ".markdownlint.yml",
+                ".markdownlintrc"
+            ],
+            "enabled": true,
+            "languages": [
+                "markdown"
+            ],
+            "name": "markdownlint",
+            "url": "https://github.com/DavidAnson/markdownlint"
+        },
+        "php-code-sniffer": {
+            "capabilities": [],
+            "command": [
+                "phpcs",
+                "--report",
+                "json",
+                [
+                    "$config",
+                    "--standard",
+                    "$config"
+                ],
+                [
+                    "!$config",
+                    "--standard",
+                    "PSR12"
+                ],
+                "--stdin-path",
+                "$file",
+                "-q",
+                "-"
+            ],
+            "configFiles": [
+                ".phpcs.xml",
+                "phpcs.xml",
+                ".phpcs.xml.dist",
+                "phpcs.xml.dist"
+            ],
+            "enabled": true,
+            "languages": [
+                "php"
+            ],
+            "name": "php-code-sniffer",
+            "url": "https://github.com/squizlabs/PHP_CodeSniffer"
+        },
+        "proselint": {
+            "capabilities": [
+                "fix-inline"
+            ],
+            "command": [
+                "proselint",
+                "--json",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "-"
+            ],
+            "configFiles": [
+                ".proselintrc"
+            ],
+            "enabled": true,
+            "languages": [
+                "markdown",
+                "html",
+                "plaintext"
+            ],
+            "name": "proselint",
+            "url": "https://github.com/amperser/proselint/"
+        },
+        "pylint": {
+            "capabilities": [
+                "ignore-file"
+            ],
+            "command": [
+                "pylint",
+                "--from-stdin",
+                "--output-format",
+                "json",
+                [
+                    "$config",
+                    "--rcfile",
+                    "$config"
+                ],
+                "$file"
+            ],
+            "configFiles": [
+                ".pylintrc"
+            ],
+            "enabled": true,
+            "languages": [
+                "python"
+            ],
+            "name": "pylint",
+            "url": "https://www.pylint.org"
+        },
+        "reek": {
+            "capabilities": [
+                "ignore-line"
+            ],
+            "command": [
+                "reek",
+                "--format",
+                "json",
+                "--no-progress",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--stdin-filename",
+                "$file"
+            ],
+            "configFiles": [
+                ".reek.yml"
+            ],
+            "enabled": true,
+            "languages": [
+                "ruby",
+                "ruby-test",
+                "ruby-puma",
+                "ruby-bundler"
+            ],
+            "name": "reek",
+            "url": "https://github.com/troessner/reek"
+        },
+        "rubocop": {
+            "capabilities": [
+                "ignore-eol",
+                "fix-category",
+                "fix-all"
+            ],
+            "command": [
+                [
+                    "$isBundler",
+                    "bundle",
+                    "exec"
+                ],
+                "rubocop",
+                [
+                    "$lint",
+                    "--format",
+                    "json",
+                    "--extra-details"
+                ],
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                [
+                    "$debug",
+                    "--debug"
+                ],
+                [
+                    "$fixAll",
+                    "--auto-correct-all",
+                    "--stderr"
+                ],
+                [
+                    "$fixCategory",
+                    "--auto-correct-all",
+                    "--only",
+                    "$code",
+                    "--stderr"
+                ],
+                "--stdin",
+                "$file"
+            ],
+            "configFiles": [
+                ".rubocop.yml"
+            ],
+            "enabled": false,
+            "languages": [
+                "ruby",
+                "ruby-test",
+                "ruby-puma",
+                "ruby-bundler"
+            ],
+            "name": "rubocop",
+            "url": "https://rubocop.org"
+        },
+        "ruby": {
+            "capabilities": [],
+            "command": [
+                "ruby",
+                "-c",
+                "-w"
+            ],
+            "configFiles": [],
+            "enabled": false,
+            "languages": [
+                "ruby",
+                "ruby-test",
+                "ruby-puma",
+                "ruby-bundler"
+            ],
+            "name": "ruby",
+            "url": "https://www.ruby-lang.org"
+        },
+        "shellcheck": {
+            "args": {
+                "$zsh": {
+                    "extensions": [
+                        ".zsh"
+                    ],
+                    "shebangs": [
+                        "/bin/zsh",
+                        "/usr/bin/zsh",
+                        "/usr/local/bin/zsh",
+                        "/usr/bin/env zsh"
+                    ]
+                }
+            },
+            "capabilities": [],
+            "command": [
+                "shellcheck",
+                "--format",
+                "json",
+                "--enable",
+                "all",
+                "-"
+            ],
+            "configFiles": [],
+            "enabled": true,
+            "languages": [
+                "shellscript",
+                "bash"
+            ],
+            "name": "shellcheck",
+            "url": "https://github.com/koalaman/shellcheck",
+            "when": [
+                "!$zsh"
+            ]
+        },
+        "sqlfluff": {
+            "args": {
+                "$mysql": {
+                    "languages": [
+                        "mysql"
+                    ]
+                },
+                "$postgres": {
+                    "languages": [
+                        "postgres"
+                    ]
+                }
+            },
+            "capabilities": [
+                "fix-all",
+                "ignore-eol"
+            ],
+            "command": [
+                "sqlfluff",
+                [
+                    "$lint",
+                    "lint",
+                    "--format",
+                    "json"
+                ],
+                [
+                    "$fixAll",
+                    "fix"
+                ],
+                [
+                    "$postgres",
+                    "--dialect",
+                    "postgres"
+                ],
+                [
+                    "$mysql",
+                    "--dialect",
+                    "mysql"
+                ],
+                "-"
+            ],
+            "configFiles": [
+                ".sqlfluff"
+            ],
+            "enabled": true,
+            "languages": [
+                "mysql",
+                "postgres",
+                "jinja-sql"
+            ],
+            "name": "sqlfluff",
+            "url": "https://docs.sqlfluff.com/en/stable/index.html"
+        },
+        "stylelint": {
+            "capabilities": [
+                "fix-all"
+            ],
+            "command": [
+                "stylelint",
+                "--formatter",
+                "json",
+                [
+                    "$fixAll",
+                    "--fix"
+                ],
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--stdin-filename",
+                "$file",
+                "--stdin"
+            ],
+            "configFiles": [
+                "stylelint.config.js",
+                ".stylelintrc.json",
+                ".stylelintrc.yml",
+                ".stylelintrc.yaml",
+                ".stylelintrc.js"
+            ],
+            "enabled": true,
+            "languages": [
+                "css",
+                "css-in-js",
+                "html",
+                "less",
+                "markdown",
+                "sass",
+                "scss",
+                "sugarss"
+            ],
+            "name": "stylelint",
+            "url": "https://stylelint.io"
+        },
+        "swiftlint": {
+            "capabilities": [
+                "ignore-line",
+                "ignore-file"
+            ],
+            "command": [
+                "swiftlint",
+                "--use-stdin",
+                "--reporter",
+                "json",
+                [
+                    "$fixAll",
+                    "--fix",
+                    "--format"
+                ],
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ]
+            ],
+            "configFiles": [
+                ".swiftlint.yml",
+                ".swiftlint.yaml"
+            ],
+            "enabled": true,
+            "languages": [
+                "swift"
+            ],
+            "name": "swiftlint",
+            "url": "https://realm.github.io/SwiftLint/"
+        },
+        "textlint": {
+            "capabilities": [
+                "fix-inline"
+            ],
+            "command": [
+                "textlint",
+                "--format",
+                "json",
+                [
+                    "$debug",
+                    "--debug"
+                ],
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--stdin",
+                "--stdin-filename",
+                "$file"
+            ],
+            "configFiles": [
+                ".textlintrc",
+                ".textlintrc.js",
+                ".textlintrc.json",
+                ".textlintrc.yaml",
+                ".textlintrc.yml"
+            ],
+            "enabled": true,
+            "languages": [
+                "markdown",
+                "plaintext",
+                "html"
+            ],
+            "name": "textlint",
+            "url": "https://textlint.github.io"
+        },
+        "vale": {
+            "capabilities": [],
+            "command": [
+                "vale",
+                "--output",
+                "JSON",
+                [
+                    "$config",
+                    "--config",
+                    "$config"
+                ],
+                "--ext",
+                "$extension"
+            ],
+            "configFiles": [
+                ".vale.ini"
+            ],
+            "enabled": true,
+            "languages": [
+                "markdown",
+                "plaintext",
+                "html"
+            ],
+            "name": "vale",
+            "url": "https://github.com/errata-ai/vale"
+        },
+        "yamllint": {
+            "capabilities": [
+                "ignore-line"
+            ],
+            "command": [
+                "yamllint",
+                "--format",
+                "parsable",
+                [
+                    "$config",
+                    "--config-file",
+                    "$config"
+                ],
+                "-"
+            ],
+            "configFiles": [
+                ".yamllint.yml",
+                ".yamllint.yaml",
+                ".yamllint"
+            ],
+            "enabled": true,
+            "languages": [
+                "yaml"
+            ],
+            "name": "yamllint",
+            "url": "https://github.com/adrienverge/yamllint"
+        }
+    },
+    "projectManager.git.baseFolders": [
+        "/home/{mauricio,core}/development",
+        "/root"
+    ],
+    "terminal.integrated.enableImages": true,
+    "scm.repositories.selectionMode": "single",
+    "claudeCode.preferredLocation": "sidebar",
+    "continue.enableNextEdit": false,
+    "chat.extensionUnification.enabled": false,
+    "githubPullRequests.codingAgent.enabled": false,
+    "remote.SSH.experimental.chat": false,
+    "atlascode.rovodev.showEntitlementNotifications": false,
+    "atlascode.bitbucket.enabled": false,
+    "projectManager.tags": [
+        "Spa",
+        "Personal"
+    ],
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "githubPullRequests.fileListLayout": "flat",
+    "githubPullRequests.hideViewedFiles": false,
+    "atlascode.rovodev.enabled": false,
+    "atlascode.bitbucket.contextMenus.enabled": false,
+    "atlascode.showWelcomeOnInstall": false
+}

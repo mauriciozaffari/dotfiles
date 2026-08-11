@@ -1,0 +1,125 @@
+[
+    {
+        "key": "ctrl+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "-workbench.action.terminal.paste",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.terminal.copySelection",
+        "when": "terminalTextSelectedInFocused || terminalFocus && terminalHasBeenCreated && terminalTextSelected || terminalFocus && terminalProcessSupported && terminalTextSelected || terminalFocus && terminalTextSelected && terminalTextSelectedInFocused || terminalHasBeenCreated && terminalTextSelected && terminalTextSelectedInFocused || terminalProcessSupported && terminalTextSelected && terminalTextSelectedInFocused"
+    },
+    {
+        "key": "ctrl+shift+r t",
+        "command": "workbench.action.tasks.test"
+    },
+    {
+        "key": "ctrl+shift+r r",
+        "command": "workbench.action.tasks.reRunTask"
+    },
+    {
+        "key": "ctrl+shift+r ctrl+shift+t",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "-editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+alt+down",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+alt+down",
+        "command": "-editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+down",
+        "command": "-editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-workbench.action.chat.newChat",
+        "when": "chatIsEnabled && inChat"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "claude-vscode.sidebar.open"
+    },
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u001b\r"
+        },
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "-workbench.action.terminal.goToRecentDirectory",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "shift+meta+.",
+        "command": "erb.toggleTags",
+        "when": "editorTextFocus && (editorLangId == 'erb' || editorLangId == 'haml')"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "-erb.toggleTags",
+        "when": "editorTextFocus && editorLangId == 'erb'"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+escape",
+        "command": "-claude-vscode.blur",
+        "when": "!config.claudeCode.useTerminal && !editorTextFocus"
+    },
+    {
+        "key": "ctrl+escape",
+        "command": "-claude-vscode.focus",
+        "when": "editorTextFocus && !config.claudeCode.useTerminal"
+    },
+    {
+        "key": "ctrl+shift+escape",
+        "command": "-claude-vscode.editor.open",
+        "when": "!config.claudeCode.useTerminal"
+    },
+    {
+        "key": "ctrl+escape",
+        "command": "-claude-vscode.terminal.open.keyboard",
+        "when": "config.claudeCode.useTerminal"
+    },
+    {
+        "key": "ctrl+escape",
+        "command": "-workbench.action.chat.cancel",
+        "when": "chatSessionHasActiveRequest && !chatRemoteJobCreating"
+    },
+    {
+        "key": "ctrl+escape",
+        "command": "-workbench.action.hideComment",
+        "when": "commentWidgetVisible && editorFocus"
+    }
+]
