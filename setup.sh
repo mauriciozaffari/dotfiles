@@ -53,10 +53,40 @@ fi
 # --------------------------------------------------
 # 1. System packages
 # --------------------------------------------------
+if ! command -v gpg >/dev/null 2>&1; then
+    info "Installing repository signing tools..."
+    sudo apt update -qq
+    sudo apt install -y -qq gnupg >/dev/null 2>&1
+fi
+
+VSCODIUM_KEYRING="/usr/share/keyrings/vscodium-archive-keyring.gpg"
+VSCODIUM_SOURCE="/etc/apt/sources.list.d/vscodium.sources"
+
+if [ ! -f "$VSCODIUM_KEYRING" ]; then
+    info "Adding the VSCodium repository signing key..."
+    curl -fsSL "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" \
+        | gpg --dearmor \
+        | sudo tee "$VSCODIUM_KEYRING" >/dev/null
+fi
+
+if [ ! -f "$VSCODIUM_SOURCE" ]; then
+    info "Adding the VSCodium apt repository..."
+    printf '%s\n' \
+        'Types: deb' \
+        'URIs: https://download.vscodium.com/debs' \
+        'Suites: vscodium' \
+        'Components: main' \
+        'Architectures: amd64 arm64' \
+        'Signed-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+        | sudo tee "$VSCODIUM_SOURCE" >/dev/null
+fi
+
 PACKAGES=(
     git
     curl
     wget
+    gnupg
+    python3
     zsh
     build-essential
     htop
@@ -67,6 +97,7 @@ PACKAGES=(
     docker-buildx-plugin
     docker-compose-plugin
     gh
+    codium
 )
 
 MISSING_PACKAGES=()
