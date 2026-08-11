@@ -1,0 +1,112 @@
+[
+	{
+		"name": "webstores/releases",
+		"rootPath": "/home/core/development/webstores.worktrees/releases/.vscode/looper-core.code-workspace",
+		"paths": [],
+		"tags": [
+			"Looper"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "webstores/reviews",
+		"rootPath": "/home/core/development/webstores.worktrees/reviews/.vscode/looper-core.code-workspace",
+		"paths": [],
+		"tags": [
+			"Looper"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "webstores/tech-debt",
+		"rootPath": "/home/core/development/webstores.worktrees/tech-debt/.vscode/looper-core.code-workspace",
+		"paths": [],
+		"tags": [
+			"Looper"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "webstores/develop",
+		"rootPath": "/home/core/development/webstores/.vscode/looper-core.code-workspace",
+		"paths": [],
+		"tags": [
+			"Looper"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "home-server",
+		"rootPath": "vscode-remote://ssh-remote+le-mans/home/mauricio/development/home-server",
+		"paths": [],
+		"tags": [
+			"Le Mans"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "pitwall",
+		"rootPath": "vscode-remote://ssh-remote+pitwall.interlagos/root/pitwall",
+		"paths": [],
+		"tags": [
+			"Interlagos"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "inscripto",
+		"rootPath": "vscode-remote://ssh-remote+inscripto.interlagos/root/inscripto-v2/.vscode/inscripto-v2.code-workspace",
+		"paths": [],
+		"tags": [
+			"Interlagos"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "webstores",
+		"rootPath": "vscode-remote://ssh-remote+looper.interlagos/root/webstores/.vscode/looper-core.code-workspace",
+		"paths": [],
+		"tags": [
+			"Interlagos"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "develoz",
+		"rootPath": "vscode-remote://ssh-remote+develoz.interlagos/root/develoz",
+		"paths": [],
+		"tags": [
+			"Interlagos"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "ams2",
+		"rootPath": "vscode-remote://ssh-remote+ams2.interlagos/C:/ams2stats",
+		"paths": [],
+		"tags": [
+			"Interlagos"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "development",
+		"rootPath": "vscode-remote://ssh-remote+le-mans/home/mauricio/development",
+		"paths": [],
+		"tags": [
+			"Le Mans"
+		],
+		"enabled": true,
+		"profile": ""
+	}
+]
