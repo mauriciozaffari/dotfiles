@@ -68,6 +68,9 @@ dotfiles/
 │   ├── git/ignore         -> ~/.config/git/ignore
 │   ├── htop/htoprc        -> ~/.config/htop/htoprc
 │   ├── tmux/tmux.conf     -> ~/.tmux.conf
+│   ├── vscodium/           -> ~/.config/VSCodium/ (selected files)
+│   │   ├── product.json, extensions.txt, view-state.json
+│   │   └── User/           (settings, keybindings, Project Manager projects)
 │   └── opencode/          -> ~/.config/opencode/
 │       ├── AGENTS.md
 │       ├── opencode.jsonc
@@ -80,6 +83,22 @@ dotfiles/
 ├── deploy.sh              (symlink configs to system)
 └── setup.sh               (full setup for new machines)
 ```
+
+## VSCodium
+
+The setup script adds VSCodium's Debian repository and installs the native
+`codium` package. Deployment manages the marketplace override, settings,
+keybindings, Project Manager projects, and the extension inventory under
+`config/vscodium/`.
+
+Workbench view placement and visibility are exported separately in
+`view-state.json`; unrelated SQLite state such as authentication, chat history,
+workspace history, and extension caches is intentionally excluded. Close
+VSCodium before deploying so these view records can be restored safely.
+
+The configured extension gallery is Microsoft's Visual Studio Marketplace.
+Its terms restrict Marketplace offerings to Visual Studio products and
+services, and proprietary extensions may reject VSCodium even when installed.
 
 ## Secrets
 
@@ -144,3 +163,4 @@ EOF
 - **Version Manager**: asdf (Node.js, Ruby, uv)
 - **Containers**: Docker + Docker Compose v2 (`docker compose`)
 - **AI Tools**: OpenCode, Claude Code
+- **Editor**: VSCodium
