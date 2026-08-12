@@ -395,6 +395,7 @@ echo ""
 
 # Shell
 info "Shell configuration"
+link_file "$DOTFILES/shell/bashrc"         "$HOME/.bashrc"
 link_file "$DOTFILES/shell/zshrc"          "$HOME/.zshrc"
 link_file "$DOTFILES/shell/docker_helpers" "$HOME/.docker_helpers"
 echo ""
