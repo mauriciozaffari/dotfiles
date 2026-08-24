@@ -5,6 +5,7 @@ This file provides guidance to AI coding agents when working with code in this r
 ## Context
 
 This is a home directory, not a project repository. Sessions here typically involve:
+
 - System configuration and troubleshooting
 - Shell/terminal customization
 - General AI assistance
