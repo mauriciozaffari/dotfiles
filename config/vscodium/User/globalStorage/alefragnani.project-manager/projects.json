@@ -108,5 +108,15 @@
 		],
 		"enabled": true,
 		"profile": ""
+	},
+	{
+		"name": "dotfiles",
+		"rootPath": "/home/mauricio/dotfiles",
+		"paths": [],
+		"tags": [
+			"Spa"
+		],
+		"enabled": true,
+		"profile": ""
 	}
 ]
