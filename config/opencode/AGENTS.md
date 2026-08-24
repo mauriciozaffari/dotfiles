@@ -1,4 +1,9 @@
-# Development Guidelines
+# Guidelines
+
+## Communication Style
+
+- When writing something intended for human consumption, (comment, commit message, reply to prompt) use as few words as possible. Pick every word meticulously to reduce the volume to a strict minimum. Be down to the point. Less is more.
+- Avoid superlatives and praise. Stop telling me I am absolutely right. Give me the cold hard truth.
 
 ## Philosophy
 
@@ -15,8 +20,7 @@
 - **Avoid premature abstractions**
 - **No clever tricks** - choose the boring solution
 - If you need to explain it, it's too complex
-- **DRY (Don't Repeat Yourself)** - Extract common logic, but only after the third use
-- **Duplication is better than the wrong abstraction** - Wait for patterns to emerge
+- **DRY (Don't Repeat Yourself)** - Extract common logic
 
 ## Technical Standards
 
@@ -61,15 +65,29 @@
 - Refer to linter configurations
 - Text files should always end with an empty line
 
+### Comments and Documentation
+
+- **Comments explain *why*, never *what*** - delete a comment that restates the code
+- **Keep comments short** - if the explanation runs past ~2 lines, it isn't a comment anymore
+- **Long-form explanation belongs in `docs/`** - rationale, trade-offs, background, step-by-step
+  behaviour, and migration/rollout notes go in the project's markdown docs
+- **Link, don't inline** - leave a one-line pointer in the code (`# See docs/DATA_MIGRATIONS.md`)
+  instead of pasting the narrative above the implementation
+- **Don't grow comment blocks across edits** - when you find yourself appending another paragraph
+  to an existing comment, move the whole thing to a doc and replace it with the pointer
+
 ## Important Reminders
 
 **NEVER**:
+
 - Use `--no-verify` to bypass commit hooks
 - Disable tests instead of fixing them
+- Disable linting rules without trying to fix it first
 - Make assumptions - verify with existing code
-- Never include Generated with Claude Code in commit messages
+- Include Generated with ... in commit messages
 
 **ALWAYS**:
+
 - Update plan documentation as you go
 - Learn from existing implementations
 - Stop after 3 failed attempts and reassess
