@@ -25,12 +25,12 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "race-control/p1",
-      "reasoningEffort": "high"
+      "model": "race-control/p2",
+      "reasoningEffort": "max"
     },
     "hephaestus": {
-      "model": "race-control/p1:h",
-      "reasoningEffort": "medium"
+      "model": "race-control/p2:h",
+      "reasoningEffort": "max"
     },
     "oracle": {
       "model": "race-control/p1:h",
@@ -68,7 +68,7 @@
       "model": "race-control/gt3"
     },
     "ultrabrain": {
-      "model": "race-control/p1:h"
+      "model": "race-control/p1"
     },
     "deep": {
       "model": "race-control/p1:h"

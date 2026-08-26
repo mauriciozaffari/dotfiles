@@ -118,5 +118,15 @@
 		],
 		"enabled": true,
 		"profile": ""
+	},
+	{
+		"name": "race-control",
+		"rootPath": "vscode-remote://ssh-remote+le-mans/home/mauricio/development/race-control",
+		"paths": [],
+		"tags": [
+			"Le Mans"
+		],
+		"enabled": true,
+		"profile": ""
 	}
 ]
