@@ -25,11 +25,11 @@
   },
   "agents": {
     "sisyphus": {
-      "model": "race-control/p2",
+      "model": "race-control/p1",
       "reasoningEffort": "max"
     },
     "hephaestus": {
-      "model": "race-control/p2:h",
+      "model": "race-control/p1:h",
       "reasoningEffort": "max"
     },
     "oracle": {
@@ -83,7 +83,7 @@
       "model": "race-control/p3"
     },
     "unspecified-high": {
-      "model": "race-control/p2"
+      "model": "race-control/p1"
     },
     "writing": {
       "model": "race-control/p3"
