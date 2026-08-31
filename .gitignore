@@ -11,6 +11,10 @@ Thumbs.db
 *.swo
 *~
 
+# Python bytecode
+__pycache__/
+*.pyc
+
 # Node (for opencode plugins)
 node_modules/
 package.json
