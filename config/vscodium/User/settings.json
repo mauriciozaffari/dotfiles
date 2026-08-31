@@ -1027,5 +1027,8 @@
     "githubPullRequests.hideViewedFiles": false,
     "atlascode.rovodev.enabled": false,
     "atlascode.bitbucket.contextMenus.enabled": false,
-    "atlascode.showWelcomeOnInstall": false
+    "atlascode.showWelcomeOnInstall": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    }
 }

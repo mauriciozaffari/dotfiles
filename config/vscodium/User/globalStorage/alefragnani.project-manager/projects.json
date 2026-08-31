@@ -128,5 +128,15 @@
 		],
 		"enabled": true,
 		"profile": ""
+	},
+	{
+		"name": "inscripto-v2",
+		"rootPath": "/home/mauricio/development/develoz/inscripto-v2/.vscode/inscripto-v2.code-workspace",
+		"paths": [],
+		"tags": [
+			"Spa"
+		],
+		"enabled": true,
+		"profile": ""
 	}
 ]
