@@ -1,11 +1,22 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
-  "codegraph": {
-    "auto_init": true,
-    "auto_provision": true,
+  "runtime_fallback": {
     "enabled": true,
-    "telemetry": false,
-    "daemon": false
+    "retry_on_errors": [
+      408,
+      409,
+      429,
+      500,
+      502,
+      503,
+      504,
+      529
+    ],
+    "max_fallback_attempts": 6,
+    "cooldown_seconds": 300,
+    "timeout_seconds": 120,
+    "notify_on_fallback": true,
+    "restore_primary_after_cooldown": true
   },
   "notification": {
     "force_enable": true
