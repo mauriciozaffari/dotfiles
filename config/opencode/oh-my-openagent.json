@@ -18,6 +18,7 @@
     "notify_on_fallback": true,
     "restore_primary_after_cooldown": true
   },
+  "telemetry": false,
   "notification": {
     "force_enable": true
   },
