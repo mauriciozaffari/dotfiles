@@ -65,7 +65,7 @@ pre_commit_check_rubocop() {
     local rubocop_exit=0
     local ran_rubocop=0
 
-    if [ -x bin/rubocop ]; then
+    if [ -x bin/rubocop ] && bin/rubocop --version >/dev/null 2>&1; then
         rubocop_output=$(bin/rubocop 2>&1)
         rubocop_exit=$?
         ran_rubocop=1
