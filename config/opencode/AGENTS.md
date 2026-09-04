@@ -85,9 +85,18 @@
 - Disable linting rules without trying to fix it first
 - Make assumptions - verify with existing code
 - Include Generated with ... in commit messages
+- **Add linter/quality exclusions (`Exclude`, `reek` exclude entries) to
+  silence warnings on new code** — fix the code instead. Exclusions are
+  only for pre-existing baselines and legitimate config.
+- **Suppress type errors, lint warnings, or security findings** — fix
+  the root cause.
+- **Commit with failing CI** — fix the issue before pushing.
 
 **ALWAYS**:
 
 - Update plan documentation as you go
 - Learn from existing implementations
 - Stop after 3 failed attempts and reassess
+- **Run the project's linters before committing** (`reek`, `rubocop`,
+  `brakeman`, etc.) and fix all warnings at the source by refactoring
+  the code — never by adding exclusions.
