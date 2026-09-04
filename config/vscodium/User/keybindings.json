@@ -57,10 +57,6 @@
         "when": "chatIsEnabled && inChat"
     },
     {
-        "key": "ctrl+l",
-        "command": "claude-vscode.sidebar.open"
-    },
-    {
         "key": "shift+enter",
         "command": "workbench.action.terminal.sendSequence",
         "args": {
@@ -91,26 +87,6 @@
     {
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+escape",
-        "command": "-claude-vscode.blur",
-        "when": "!config.claudeCode.useTerminal && !editorTextFocus"
-    },
-    {
-        "key": "ctrl+escape",
-        "command": "-claude-vscode.focus",
-        "when": "editorTextFocus && !config.claudeCode.useTerminal"
-    },
-    {
-        "key": "ctrl+shift+escape",
-        "command": "-claude-vscode.editor.open",
-        "when": "!config.claudeCode.useTerminal"
-    },
-    {
-        "key": "ctrl+escape",
-        "command": "-claude-vscode.terminal.open.keyboard",
-        "when": "config.claudeCode.useTerminal"
     },
     {
         "key": "ctrl+escape",

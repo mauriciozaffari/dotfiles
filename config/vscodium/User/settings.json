@@ -82,18 +82,6 @@
                 "new-window"
             ]
         },
-        "Claude": {
-            "path": "claude",
-            "icon": "claude",
-            "color": "terminal.ansiYellow",
-            "overrideName": true
-        },
-        "Codex": {
-            "path": "codex",
-            "icon": "openai",
-            "color": "terminal.ansiBlack",
-            "overrideName": true
-        },
         "opencode": {
             "path": "tmux",
             "args": [
@@ -115,8 +103,6 @@
         "agent",
         "agy",
         "copilot",
-        "claude",
-        "codex",
         "gemini",
         "opencode"
     ],
@@ -1001,7 +987,6 @@
     ],
     "terminal.integrated.enableImages": true,
     "scm.repositories.selectionMode": "single",
-    "claudeCode.preferredLocation": "sidebar",
     "continue.enableNextEdit": false,
     "chat.extensionUnification.enabled": false,
     "githubPullRequests.codingAgent.enabled": false,
