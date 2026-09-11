@@ -173,7 +173,10 @@ install_vscodium_extensions() {
     fi
 
     local installed
-    installed="$(codium --list-extensions)"
+    if ! installed="$(codium --list-extensions 2>/dev/null)"; then
+        warn "VSCodium extension query failed; skipping extensions"
+        return
+    fi
     while IFS= read -r extension; do
         [ -n "$extension" ] || continue
         if printf '%s\n' "$installed" | grep -qFx "$extension"; then
@@ -466,7 +469,11 @@ echo ""
 
 # AGENTS.md
 info "AI assistant configuration"
-link_file "$DOTFILES/AGENTS.md" "$HOME/AGENTS.md"
+if [ -f "$STATE_DIR/skip_agents" ] || { [ -f "$HOME/AGENTS.md" ] && grep -qiE '<!--\s*dotfiles:(no-override|preserve|local)\s*-->' "$HOME/AGENTS.md"; }; then
+    ok "$HOME/AGENTS.md (override skipped: flagged to preserve)"
+else
+    link_file "$DOTFILES/AGENTS.md" "$HOME/AGENTS.md"
+fi
 link_file "$HOME/AGENTS.md"     "$HOME/CLAUDE.md"
 link_file "$HOME/AGENTS.md"     "$HOME/GEMINI.md"
 echo ""
