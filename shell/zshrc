@@ -78,6 +78,7 @@ fi
 export QLTY_INSTALL="$HOME/.qlty"
 export PATH="$QLTY_INSTALL/bin:$PATH"
 
-
-# Added by Antigravity CLI installer
 export PATH="/home/mauricio/.local/bin:$PATH"
+export PATH="/home/mauricio/.bun/bin:$PATH"
+
+export DO_NOT_TRACK=1

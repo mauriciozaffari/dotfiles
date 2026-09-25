@@ -1,45 +1,5 @@
 [
 	{
-		"name": "webstores/releases",
-		"rootPath": "/home/core/development/webstores.worktrees/releases/.vscode/looper-core.code-workspace",
-		"paths": [],
-		"tags": [
-			"Looper"
-		],
-		"enabled": true,
-		"profile": ""
-	},
-	{
-		"name": "webstores/reviews",
-		"rootPath": "/home/core/development/webstores.worktrees/reviews/.vscode/looper-core.code-workspace",
-		"paths": [],
-		"tags": [
-			"Looper"
-		],
-		"enabled": true,
-		"profile": ""
-	},
-	{
-		"name": "webstores/tech-debt",
-		"rootPath": "/home/core/development/webstores.worktrees/tech-debt/.vscode/looper-core.code-workspace",
-		"paths": [],
-		"tags": [
-			"Looper"
-		],
-		"enabled": true,
-		"profile": ""
-	},
-	{
-		"name": "webstores/develop",
-		"rootPath": "/home/core/development/webstores/.vscode/looper-core.code-workspace",
-		"paths": [],
-		"tags": [
-			"Looper"
-		],
-		"enabled": true,
-		"profile": ""
-	},
-	{
 		"name": "home-server",
 		"rootPath": "vscode-remote://ssh-remote+le-mans/home/mauricio/development/home-server",
 		"paths": [],
@@ -135,6 +95,16 @@
 		"paths": [],
 		"tags": [
 			"Spa"
+		],
+		"enabled": true,
+		"profile": ""
+	},
+	{
+		"name": "develoz-b2b",
+		"rootPath": "vscode-remote://ssh-remote+develoz.interlagos/root/develoz-b2b/.vscode/develoz-b2b.code-workspace",
+		"paths": [],
+		"tags": [
+			"Interlagos"
 		],
 		"enabled": true,
 		"profile": ""

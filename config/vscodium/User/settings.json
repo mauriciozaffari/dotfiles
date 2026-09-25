@@ -1015,5 +1015,6 @@
     "atlascode.showWelcomeOnInstall": false,
     "[javascript]": {
         "editor.defaultFormatter": "biomejs.biome"
-    }
+    },
+    "remote.autoForwardPortsSource": "hybrid"
 }
