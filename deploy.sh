@@ -163,6 +163,31 @@ PY
     ok "VSCodium view organization restored"
 }
 
+install_vscodium_openvsx_fallback() {
+    # product.json points at the MS marketplace, so Open VSX-only
+    # extensions (e.g. jeanp413.open-remote-ssh) 404 there. Fetch the
+    # VSIX from Open VSX and install from file.
+    local extension="$1"
+    local publisher="${extension%%.*}"
+    local name="${extension#*.}"
+    local api_url="https://open-vsx.org/api/${publisher}/${name}"
+    local download_url tmp
+
+    download_url="$(curl -fsSL "$api_url" 2>/dev/null | python3 -c "import json,sys; print(json.load(sys.stdin)['files']['download'])")" || return 1
+    [ -n "$download_url" ] || return 1
+
+    tmp="$(mktemp --suffix=.vsix)" || return 1
+    if ! curl -fsSL -o "$tmp" "$download_url"; then
+        rm -f "$tmp"
+        return 1
+    fi
+    if ! codium --install-extension "$tmp"; then
+        rm -f "$tmp"
+        return 1
+    fi
+    rm -f "$tmp"
+}
+
 install_vscodium_extensions() {
     local extensions_file="$DOTFILES/config/vscodium/extensions.txt"
 
@@ -177,13 +202,23 @@ install_vscodium_extensions() {
         warn "VSCodium extension query failed; skipping extensions"
         return
     fi
+    local extension output
     while IFS= read -r extension; do
         [ -n "$extension" ] || continue
         if printf '%s\n' "$installed" | grep -qFx "$extension"; then
             continue
         fi
         info "Installing VSCodium extension: $extension"
-        codium --install-extension "$extension"
+        output="$(codium --install-extension "$extension" 2>&1)" || true
+        printf '%s\n' "$output" | grep -v 'DeprecationWarning\|trace-deprecation' || true
+        if printf '%s\n' "$output" | grep -qi 'not found\|failed installing'; then
+            warn "$extension not in marketplace gallery; trying Open VSX..."
+            if install_vscodium_openvsx_fallback "$extension"; then
+                ok "$extension installed from Open VSX"
+            else
+                warn "Failed installing $extension from Open VSX"
+            fi
+        fi
     done < "$extensions_file"
     ok "VSCodium extensions installed"
 }
