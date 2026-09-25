@@ -15,26 +15,6 @@ var CACHE_PATH = join(
 	"race-control-plugin.js",
 );
 
-var race_control_default = async (input, options) => {
-	const pluginURL = process.env.RACE_CONTROL_PLUGIN_URL ?? DEFAULT_PLUGIN_URL;
-	const modelsURL = process.env.RACE_CONTROL_MODELS_URL ?? DEFAULT_MODELS_URL;
-	const modelsMode =
-		options?.modelsMode ?? process.env.RACE_CONTROL_MODELS_MODE ?? "profiles";
-	let pluginSource;
-	try {
-		pluginSource = await refreshCache(pluginURL);
-	} catch (error) {
-		if (!(error instanceof Error)) throw error;
-		pluginSource = await readFile(CACHE_PATH, "utf8");
-	}
-	let models = null;
-	try {
-		models = await fetchModels(modelsURL, modelsMode);
-	} catch {}
-	const plugin = await importPlugin(pluginSource);
-	return plugin(input, { ...options, models });
-};
-
 async function refreshCache(pluginURL) {
 	const response = await fetch(pluginURL, {
 		signal: AbortSignal.timeout(2000),
@@ -70,17 +50,71 @@ async function importPlugin(source) {
 	await mkdir(dirname(CACHE_PATH), { recursive: true });
 	await writeFile(CACHE_PATH, source, "utf8");
 	const mod = await import(pathToFileURL(CACHE_PATH).href);
-	if (
-		typeof mod !== "object" ||
-		mod === null ||
-		!("default" in mod) ||
-		typeof mod.default !== "function"
-	) {
+	const target = mod?.default ?? mod;
+	const server =
+		typeof target === "function" ? target : target?.server;
+	if (typeof server !== "function") {
 		throw new Error(
-			"Race Control plugin module does not export a plugin function",
+			"Race Control plugin module does not export a server plugin function",
 		);
 	}
-	return mod.default;
+	return {
+		id: target?.id ?? "race-control",
+		setup: typeof target?.setup === "function" ? target.setup : undefined,
+		server,
+	};
 }
+
+var race_control_v1 = async (input, options) => {
+	const pluginURL = process.env.RACE_CONTROL_PLUGIN_URL ?? DEFAULT_PLUGIN_URL;
+	const modelsURL = process.env.RACE_CONTROL_MODELS_URL ?? DEFAULT_MODELS_URL;
+	const modelsMode =
+		options?.modelsMode ?? process.env.RACE_CONTROL_MODELS_MODE ?? "profiles";
+	let pluginSource;
+	try {
+		pluginSource = await refreshCache(pluginURL);
+	} catch (error) {
+		if (!(error instanceof Error)) throw error;
+		pluginSource = await readFile(CACHE_PATH, "utf8");
+	}
+	let models = null;
+	try {
+		models = await fetchModels(modelsURL, modelsMode);
+	} catch {}
+	const plugin = await importPlugin(pluginSource);
+	return plugin.server(input, { ...options, models });
+};
+
+var race_control_v2 = async (ctx) => {
+	const pluginURL = process.env.RACE_CONTROL_PLUGIN_URL ?? DEFAULT_PLUGIN_URL;
+	const modelsURL = process.env.RACE_CONTROL_MODELS_URL ?? DEFAULT_MODELS_URL;
+	const options = ctx?.options ?? {};
+	const modelsMode =
+		options.modelsMode ?? process.env.RACE_CONTROL_MODELS_MODE ?? "profiles";
+	let pluginSource;
+	try {
+		pluginSource = await refreshCache(pluginURL);
+	} catch (error) {
+		if (!(error instanceof Error)) throw error;
+		pluginSource = await readFile(CACHE_PATH, "utf8");
+	}
+	let models = null;
+	try {
+		models = await fetchModels(modelsURL, modelsMode);
+	} catch {}
+	const plugin = await importPlugin(pluginSource);
+	if (plugin.setup) {
+		await plugin.setup({
+			...ctx,
+			options: { ...options, models },
+		});
+	}
+};
+
+var race_control_default = {
+	id: "race-control",
+	setup: race_control_v2,
+	server: race_control_v1,
+};
 
 export { race_control_default as default };
