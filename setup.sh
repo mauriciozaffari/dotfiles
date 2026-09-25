@@ -51,69 +51,106 @@ if [ -z "$GIT_NAME" ] || [ -z "$GIT_EMAIL" ]; then
 fi
 
 # --------------------------------------------------
-# 1. System packages
+# 1. System packages (Debian/Ubuntu vs Arch/Omarchy)
 # --------------------------------------------------
-if ! command -v gpg >/dev/null 2>&1; then
-    info "Installing repository signing tools..."
-    sudo apt update -qq
-    sudo apt install -y -qq gnupg >/dev/null 2>&1
-fi
-
-VSCODIUM_KEYRING="/usr/share/keyrings/vscodium-archive-keyring.gpg"
-VSCODIUM_SOURCE="/etc/apt/sources.list.d/vscodium.sources"
-
-if [ ! -f "$VSCODIUM_KEYRING" ]; then
-    info "Adding the VSCodium repository signing key..."
-    curl -fsSL "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" \
-        | gpg --dearmor \
-        | sudo tee "$VSCODIUM_KEYRING" >/dev/null
-fi
-
-if [ ! -f "$VSCODIUM_SOURCE" ]; then
-    info "Adding the VSCodium apt repository..."
-    printf '%s\n' \
-        'Types: deb' \
-        'URIs: https://download.vscodium.com/debs' \
-        'Suites: vscodium' \
-        'Components: main' \
-        'Architectures: amd64 arm64' \
-        'Signed-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
-        | sudo tee "$VSCODIUM_SOURCE" >/dev/null
-fi
-
-PACKAGES=(
-    git
-    curl
-    wget
-    gnupg
-    python3
-    zsh
-    build-essential
-    htop
-    tmux
-    docker-ce
-    docker-ce-cli
-    containerd.io
-    docker-buildx-plugin
-    docker-compose-plugin
-    gh
-    codium
-)
-
-MISSING_PACKAGES=()
-for package in "${PACKAGES[@]}"; do
-    if ! dpkg -s "$package" >/dev/null 2>&1; then
-        MISSING_PACKAGES+=("$package")
+if command -v apt-get >/dev/null 2>&1; then
+    if ! command -v gpg >/dev/null 2>&1; then
+        info "Installing repository signing tools..."
+        sudo apt update -qq
+        sudo apt install -y -qq gnupg >/dev/null 2>&1
     fi
-done
 
-if [ ${#MISSING_PACKAGES[@]} -eq 0 ]; then
-    ok "System packages already installed"
-else
-    info "Installing system packages..."
-    sudo apt update -qq
-    sudo apt install -y -qq "${MISSING_PACKAGES[@]}" >/dev/null 2>&1
+    VSCODIUM_KEYRING="/usr/share/keyrings/vscodium-archive-keyring.gpg"
+    VSCODIUM_SOURCE="/etc/apt/sources.list.d/vscodium.sources"
+
+    if [ ! -f "$VSCODIUM_KEYRING" ]; then
+        info "Adding the VSCodium repository signing key..."
+        sudo mkdir -p "$(dirname "$VSCODIUM_KEYRING")"
+        curl -fsSL "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" \
+            | gpg --dearmor \
+            | sudo tee "$VSCODIUM_KEYRING" >/dev/null
+    fi
+
+    if [ ! -f "$VSCODIUM_SOURCE" ]; then
+        info "Adding the VSCodium apt repository..."
+        sudo mkdir -p "$(dirname "$VSCODIUM_SOURCE")"
+        printf '%s\n' \
+            'Types: deb' \
+            'URIs: https://download.vscodium.com/debs' \
+            'Suites: vscodium' \
+            'Components: main' \
+            'Architectures: amd64 arm64' \
+            'Signed-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+            | sudo tee "$VSCODIUM_SOURCE" >/dev/null
+    fi
+
+    PACKAGES=(
+        git
+        curl
+        wget
+        gnupg
+        python3
+        zsh
+        build-essential
+        htop
+        tmux
+        docker-ce
+        docker-ce-cli
+        containerd.io
+        docker-buildx-plugin
+        docker-compose-plugin
+        gh
+        codium
+    )
+
+    MISSING_PACKAGES=()
+    for package in "${PACKAGES[@]}"; do
+        if ! dpkg -s "$package" >/dev/null 2>&1; then
+            MISSING_PACKAGES+=("$package")
+        fi
+    done
+
+    if [ ${#MISSING_PACKAGES[@]} -eq 0 ]; then
+        ok "System packages already installed"
+    else
+        info "Installing system packages..."
+        sudo apt update -qq
+        sudo apt install -y -qq "${MISSING_PACKAGES[@]}" >/dev/null 2>&1
+        ok "System packages installed"
+    fi
+elif command -v pacman >/dev/null 2>&1; then
+    # vscodium is AUR-only, so it installs separately below.
+    ARCH_PACKAGES=(
+        git
+        curl
+        wget
+        gnupg
+        python
+        zsh
+        base-devel
+        htop
+        tmux
+        docker
+        docker-compose
+        docker-buildx
+        github-cli
+    )
+    info "Installing Arch system packages..."
+    sudo pacman -S --noconfirm --needed "${ARCH_PACKAGES[@]}"
+    if pacman -Qq 2>/dev/null | grep -qxE 'codium|vscodium|vscodium-bin'; then
+        ok "VSCodium already installed"
+    elif command -v yay >/dev/null 2>&1; then
+        info "Installing vscodium-bin from AUR..."
+        yay -S --noconfirm --needed vscodium-bin
+    elif command -v paru >/dev/null 2>&1; then
+        info "Installing vscodium-bin from AUR..."
+        paru -S --noconfirm --needed vscodium-bin
+    else
+        warn "No AUR helper (yay/paru); skipping vscodium install"
+    fi
     ok "System packages installed"
+else
+    warn "No supported package manager (apt/pacman); skipping system packages"
 fi
 
 # --------------------------------------------------
@@ -188,9 +225,13 @@ fi
 # 6. Clone dotfiles
 # --------------------------------------------------
 if [ -d "$DOTFILES_DIR" ]; then
-    info "Dotfiles directory exists, pulling latest..."
-    git -C "$DOTFILES_DIR" pull --ff-only
-    ok "Dotfiles updated"
+    if git -C "$DOTFILES_DIR" diff --quiet && git -C "$DOTFILES_DIR" diff --cached --quiet; then
+        info "Dotfiles directory exists, pulling latest..."
+        git -c pull.rebase=false -C "$DOTFILES_DIR" pull --ff-only
+        ok "Dotfiles updated"
+    else
+        warn "Dotfiles has local changes; skipping pull (commit them and re-run to update)"
+    fi
 else
     info "Cloning dotfiles..."
     git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
