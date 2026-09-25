@@ -440,7 +440,9 @@ done
 
 for plugin in "$DOTFILES/config/opencode/plugins/"*.js; do
     [ -e "$plugin" ] || continue
-    link_file "$plugin" "$HOME/.config/opencode/race-control/$(basename "$plugin")"
+    # Auto-discovery (plugin|plugins dirs) accepts standalone files on both
+    # opencode v1 and v2; a configured absolute file path is rejected by v2.
+    link_file "$plugin" "$HOME/.config/opencode/plugins/$(basename "$plugin")"
 done
 
 for agent in "$DOTFILES/config/opencode/agent/"*.md; do
